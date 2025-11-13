@@ -15,14 +15,10 @@ export default function Header() {
   const { setIsCartOpen } = useCart();
 
   const navItems = [
+    { label: "home", href: "/" },
     { label: "all products", href: "/products", hasDropdown: true },
-    { label: "nutrition", href: "/products?category=nutrition" },
-    { label: "health & wellness", href: "/products?category=wellness" },
-    { label: "grooming", href: "/products?category=grooming" },
-    { label: "accessories", href: "/products?category=accessories", hasDropdown: true },
-    { label: "treats", href: "/products?category=treats" },
-    { label: "brands", href: "/products?category=brands", hasDropdown: true },
     { label: "about us", href: "/about" },
+    { label: "contact", href: "/contact" },
   ];
 
   return (
