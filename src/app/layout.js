@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/contexts/CartContext";
 import CartSidebar from "@/components/CartSidebar";
+import SystemStatusBar from "@/app/components/SystemStatusBar";
 
 const playfair = Playfair_Display({
   variable: "--font-heading",
@@ -38,9 +39,10 @@ export default function RootLayout({ children }) {
       <body className={`${playfair.variable} ${poppins.variable} ${geistMono.variable} antialiased bg-background text-foreground`}>
         <CartProvider>
           <Header />
-          <main className="min-h-[60vh]">{children}</main>
+          <main className="min-h-[60vh] pb-20">{children}</main>
           <Footer />
           <CartSidebar />
+          <SystemStatusBar />
         </CartProvider>
       </body>
     </html>

@@ -1,23 +1,51 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand palette */
-  --background: #FAF9F6;      /* Off-white */
-  --foreground: #1B1B1B;      /* Charcoal Black (text) */
-  --brand-primary: #2F3D36;   /* Deep Forest Green */
-  --brand-secondary: #C2B8A3; /* Soft Beige */
-  --brand-accent: #E6DED2;    /* Muted Cream */
-  --brand-optional: #A46B47;  /* Muted Terracotta */
+  /* Matrix Color Tokens */
+  --bg-main: #040608;
+  --bg-alt: #050b11;
+  --bg-card: #070f17;
+  --accent-neon-green: #00ff95;
+  --accent-cyan: #00e0ff;
+  --accent-purple: #7c5cff;
+  --accent-warning: #ffed4f;
+  --accent-error: #ff3670;
+  --text-primary: #f5f7ff;
+  --text-secondary: #a7b2c7;
+  --text-muted: #6c7383;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-glow-green: rgba(0, 255, 149, 0.5);
+
+  /* Legacy support - map to Matrix */
+  --background: var(--bg-main);
+  --foreground: var(--text-primary);
+  --brand-primary: var(--accent-neon-green);
+  --brand-secondary: var(--accent-cyan);
+  --brand-accent: var(--accent-purple);
+  --brand-optional: var(--accent-warning);
 }
 
 @theme inline {
   /* Map CSS variables to Tailwind tokens */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--brand-primary);
-  --color-secondary: var(--brand-secondary);
-  --color-accent: var(--brand-accent);
-  --color-terra: var(--brand-optional);
+  --color-background: var(--bg-main);
+  --color-foreground: var(--text-primary);
+  --color-primary: var(--accent-neon-green);
+  --color-secondary: var(--accent-cyan);
+  --color-accent: var(--accent-purple);
+  --color-terra: var(--accent-warning);
+  
+  /* Matrix specific colors */
+  --color-bg-alt: var(--bg-alt);
+  --color-bg-card: var(--bg-card);
+  --color-neon-green: var(--accent-neon-green);
+  --color-cyan: var(--accent-cyan);
+  --color-purple: var(--accent-purple);
+  --color-warning: var(--accent-warning);
+  --color-error: var(--accent-error);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-glow: var(--border-glow-green);
 
   /* Fonts */
   --font-sans: var(--font-body);
@@ -25,17 +53,124 @@
   --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #111111;
-    --foreground: #FAF9F6;
+body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Matrix Animation Utilities */
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes neon-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 5px var(--accent-neon-green), 0 0 10px var(--accent-neon-green), 0 0 15px var(--accent-neon-green);
+    opacity: 1;
+  }
+  50% { 
+    box-shadow: 0 0 2px var(--accent-neon-green), 0 0 5px var(--accent-neon-green), 0 0 8px var(--accent-neon-green);
+    opacity: 0.8;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, Segoe UI,
-    Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol;
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes code-rain {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  51% { opacity: 0.9; }
+  52% { opacity: 0.7; }
+}
+
+@keyframes rgb-split {
+  0%, 100% { 
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% { 
+    filter: drop-shadow(-2px 0 0 rgba(255, 0, 0, 0.5)) 
+            drop-shadow(2px 0 0 rgba(0, 255, 255, 0.5));
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { 
+    background-position: 0% 50%;
+  }
+  50% { 
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes grid-pulse {
+  0%, 100% { 
+    opacity: 0.1;
+  }
+  50% { 
+    opacity: 0.2;
+  }
+}
+
+.matrix-glitch {
+  animation: glitch 0.3s infinite;
+}
+
+.matrix-neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.matrix-scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.matrix-scanline::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to bottom, transparent, var(--accent-neon-green), transparent);
+  animation: scanline 3s linear infinite;
+  pointer-events: none;
+}
+
+.matrix-flicker {
+  animation: flicker 0.15s;
+}
+
+.matrix-rgb-split {
+  animation: rgb-split 0.3s;
+}
+
+.matrix-grid-pulse {
+  animation: grid-pulse 3s ease-in-out infinite;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
