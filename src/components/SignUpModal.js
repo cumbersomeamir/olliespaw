@@ -5,6 +5,9 @@ import Link from "next/link";
 
 export default function SignUpModal({ isOpen, onClose, onSwitchToSignIn }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -16,10 +19,50 @@ export default function SignUpModal({ isOpen, onClose, onSwitchToSignIn }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign up:", formData);
-    // Handle sign up logic here
+    setIsLoading(true);
+    setError("");
+    setSuccess(false);
+
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to create account");
+      }
+
+      setSuccess(true);
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        countryCode: "+91",
+        mobileNumber: "",
+        email: "",
+        password: "",
+      });
+      
+      // Close modal after 2 seconds
+      setTimeout(() => {
+        onClose();
+        setSuccess(false);
+        // Optionally switch to sign in modal
+        onSwitchToSignIn();
+      }, 2000);
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -75,6 +118,20 @@ export default function SignUpModal({ isOpen, onClose, onSwitchToSignIn }) {
                 Sign In
               </button>
             </p>
+
+            {/* Error Message */}
+            {error && (
+              <div className="mb-4 rounded border border-red-500/30 bg-red-500/10 px-4 py-3">
+                <p className="text-sm text-red-600">{error}</p>
+              </div>
+            )}
+
+            {/* Success Message */}
+            {success && (
+              <div className="mb-4 rounded border border-green-500/30 bg-green-500/10 px-4 py-3">
+                <p className="text-sm text-green-600">Account created successfully! Redirecting to sign in...</p>
+              </div>
+            )}
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -234,9 +291,10 @@ export default function SignUpModal({ isOpen, onClose, onSwitchToSignIn }) {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-wider text-background hover:bg-primary/90"
+                disabled={isLoading}
+                className="w-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-wider text-background hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Create Account
+                {isLoading ? "Creating Account..." : "Create Account"}
               </button>
             </form>
           </div>

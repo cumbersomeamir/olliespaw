@@ -6,6 +6,8 @@ import Link from "next/link";
 export default function SignInModal({ isOpen, onClose, onSwitchToSignUp }) {
   const [showPassword, setShowPassword] = useState(false);
   const [useEmail, setUseEmail] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     countryCode: "+91",
     mobileNumber: "",
@@ -15,10 +17,54 @@ export default function SignInModal({ isOpen, onClose, onSwitchToSignUp }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign in:", formData);
-    // Handle sign in logic here
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const payload = {
+        password: formData.password,
+      };
+
+      if (useEmail) {
+        payload.email = formData.email;
+      } else {
+        payload.mobileNumber = formData.mobileNumber;
+        payload.countryCode = formData.countryCode;
+      }
+
+      const response = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to sign in");
+      }
+
+      // Success - close modal and optionally store user data
+      // You might want to store the user data in context or localStorage
+      console.log("Sign in successful:", data.user);
+      onClose();
+      
+      // Reset form
+      setFormData({
+        countryCode: "+91",
+        mobileNumber: "",
+        email: "",
+        password: "",
+      });
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -84,6 +130,13 @@ export default function SignInModal({ isOpen, onClose, onSwitchToSignUp }) {
                 </button>
               </p>
             </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="mb-4 rounded border border-red-500/30 bg-red-500/10 px-4 py-3">
+                <p className="text-sm text-red-600">{error}</p>
+              </div>
+            )}
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -207,9 +260,10 @@ export default function SignInModal({ isOpen, onClose, onSwitchToSignUp }) {
               {/* Sign In Button */}
               <button
                 type="submit"
-                className="w-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-wider text-background hover:bg-primary/90"
+                disabled={isLoading}
+                className="w-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-wider text-background hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Sign In
+                {isLoading ? "Signing In..." : "Sign In"}
               </button>
 
               {/* OR Separator */}
