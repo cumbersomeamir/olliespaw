@@ -23,8 +23,7 @@ function Panel({ color }) {
       style={{ backgroundColor: color }}
     >
       <h2 className="pointer-events-none absolute left-6 top-6 z-10 font-sans text-[48px] font-extrabold uppercase leading-none tracking-tight text-white md:left-10 md:top-10 md:text-[72px] lg:left-12 lg:top-12 lg:text-[92px]">
-        <span className="block">store</span>
-        <span className="block">opening</span>
+        <span className="block">DOG</span>
       </h2>
 
       {/* Wireframe overlay (inline SVG) */}

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { findUserByEmailOrMobile } from '@/models/User';
+import bcrypt from 'bcryptjs';
 
 export async function POST(request) {
   try {
@@ -35,8 +36,10 @@ export async function POST(request) {
       );
     }
 
-    // Check password (In production, you should compare hashed passwords using bcrypt)
-    if (user.password !== password) {
+    // Compare password with hashed password using bcrypt
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    
+    if (!isPasswordValid) {
       return NextResponse.json(
         { error: 'Invalid credentials' },
         { status: 401 }
