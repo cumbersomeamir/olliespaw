@@ -111,15 +111,15 @@ export default function CustomerFavorites() {
   }, []);
 
   return (
-    <section className="relative w-full bg-[#050b11] py-16">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="relative w-full bg-[#050b11] py-8 sm:py-12 md:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div
-          className={`mb-12 text-center transition-all duration-1000 ${
+          className={`mb-8 sm:mb-10 md:mb-12 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
           }`}
         >
-          <h2 className="mb-2 text-2xl font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
+          <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
             CUSTOMER FAVORITES
           </h2>
           <p className="font-mono text-sm text-[#6c7383]">
@@ -128,7 +128,7 @@ export default function CustomerFavorites() {
         </div>
 
         {/* Category Grid */}
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {FAVORITE_CATEGORIES.map((category, index) => (
             <DataTile
               key={category.id}

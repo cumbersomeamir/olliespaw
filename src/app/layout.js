@@ -21,9 +21,9 @@ const poppins = Poppins({
 const geistMono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata = {
-  title: "Ollie’s Paw — Every Paw Matters",
+  title: "Ollie's Paw — Every Paw Matters",
   description:
-    "Ollie’s Paw creates premium, wellness-focused pet products made with love and backed by science. Health, nutrition & care for every paw.",
+    "Ollie's Paw creates premium, wellness-focused pet products made with love and backed by science. Health, nutrition & care for every paw.",
   keywords: [
     "pet care India",
     "dog nutrition India",
@@ -31,6 +31,11 @@ export const metadata = {
     "natural pet food",
     "pet supplements India",
   ],
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -39,7 +44,7 @@ export default function RootLayout({ children }) {
       <body className={`${playfair.variable} ${poppins.variable} ${geistMono.variable} antialiased bg-background text-foreground`}>
         <CartProvider>
           <Header />
-          <main className="min-h-[60vh] pb-20">{children}</main>
+          <main className="min-h-[60vh] pb-12 sm:pb-16 md:pb-20">{children}</main>
           <Footer />
           <CartSidebar />
           <SystemStatusBar />

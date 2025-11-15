@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
 import SignUpModal from "./SignUpModal";
 import SignInModal from "./SignInModal";
@@ -12,7 +12,13 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setIsCartOpen } = useCart();
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   const navItems = [
     { label: "home", href: "/" },
@@ -22,10 +28,15 @@ export default function Header() {
   ];
 
   return (
-    <header className="border-b border-foreground/10 bg-background">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/* Left Navigation */}
-        <nav className="flex items-center gap-6 text-sm text-foreground">
+    <header className="border-b border-foreground/10 bg-background sticky top-0 z-50">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+        {/* Logo/Brand - Mobile */}
+        <Link href="/" className="text-lg sm:text-xl font-bold md:hidden">
+          OLLIE'S PAW
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6 text-sm text-foreground">
           {navItems.map((item) => (
             <div
               key={item.label}
@@ -73,11 +84,11 @@ export default function Header() {
         </nav>
 
         {/* Right Icons */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           {/* Search Icon */}
           <button
             aria-label="Search"
-            className="text-foreground hover:text-foreground/70"
+            className="text-foreground hover:text-foreground/70 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <svg
               className="h-5 w-5"
@@ -98,7 +109,7 @@ export default function Header() {
           <button
             onClick={() => setIsSignUpModalOpen(true)}
             aria-label="Account"
-            className="text-foreground hover:text-foreground/70"
+            className="text-foreground hover:text-foreground/70 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <svg
               className="h-5 w-5"
@@ -119,7 +130,7 @@ export default function Header() {
           <button
             onClick={() => setIsCartOpen(true)}
             aria-label="Shopping Cart"
-            className="text-foreground hover:text-foreground/70"
+            className="text-foreground hover:text-foreground/70 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <svg
               className="h-5 w-5"
@@ -135,8 +146,58 @@ export default function Header() {
               />
             </svg>
           </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Menu"
+            className="md:hidden text-foreground hover:text-foreground/70 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center ml-2"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isMobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden border-t border-foreground/10 bg-background">
+          <nav className="px-4 py-4 space-y-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`block py-3 px-4 text-sm text-foreground hover:bg-foreground/5 rounded-lg touch-manipulation min-h-[44px] flex items-center ${
+                  pathname === item.href ? "bg-foreground/10 font-semibold" : ""
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
 
       {/* Sign Up Modal */}
       <SignUpModal

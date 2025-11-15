@@ -67,9 +67,11 @@ function Panel({ panel, isVisible, mousePosition, index }) {
   return (
     <Link
       href={index === 0 ? "/products?category=dog" : index === 1 ? "/products?category=cat" : "/products"}
-      className="group relative block h-[80vh] w-full overflow-hidden bg-[#050b11] transition-all duration-500 hover:bg-[#070f17]"
+      className="group relative block h-[60vh] sm:h-[70vh] md:h-[80vh] w-full overflow-hidden bg-[#050b11] transition-all duration-500 hover:bg-[#070f17] active:bg-[#070f17] touch-manipulation"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(false)}
       style={{
         transform: isHovered 
           ? `perspective(1000px) rotateY(${mousePosition.x * 0.1}deg) rotateX(${-mousePosition.y * 0.1}deg) translateZ(20px)`
@@ -78,8 +80,8 @@ function Panel({ panel, isVisible, mousePosition, index }) {
       }}
     >
       {/* Background Effects */}
-      <CodeRain intensity={15} speed={60} />
-      <GridOverlay opacity={0.15} pulse={true} />
+      <CodeRain intensity={8} speed={60} />
+      <GridOverlay opacity={0.08} pulse={true} />
       
       {/* Neon Border Frame */}
       <div
@@ -101,7 +103,7 @@ function Panel({ panel, isVisible, mousePosition, index }) {
       <div className="absolute inset-0 flex items-center justify-center">
         <svg
           viewBox="0 0 400 400"
-          className="w-3/4 h-3/4 opacity-30 transition-opacity duration-500 group-hover:opacity-60"
+          className="w-2/3 h-2/3 sm:w-3/4 sm:h-3/4 opacity-20 sm:opacity-30 transition-opacity duration-500 group-hover:opacity-40 sm:group-hover:opacity-60"
           style={{ filter: `drop-shadow(0 0 10px ${panel.accent})` }}
         >
           <g
@@ -142,21 +144,21 @@ function Panel({ panel, isVisible, mousePosition, index }) {
 
       {/* Title - Glitch Reveal */}
       <div
-        className={`absolute left-6 top-6 z-10 transition-all duration-1000 ${
+        className={`absolute left-3 top-3 sm:left-4 sm:top-4 md:left-6 md:top-6 z-10 transition-all duration-1000 ${
           isVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4"
         }`}
         style={{ transitionDelay: `${panel.delay}ms` }}
       >
-        <h2 className="font-sans text-[48px] font-extrabold uppercase leading-none tracking-tight md:text-[72px] lg:text-[92px] block text-white">
+        <h2 className="font-sans text-[32px] sm:text-[40px] md:text-[48px] lg:text-[72px] xl:text-[92px] font-extrabold uppercase leading-none tracking-tight block text-white">
           {panel.label}
         </h2>
       </div>
 
       {/* Subtitle - Word by Word Reveal */}
       <div
-        className={`absolute left-6 bottom-20 z-10 transition-all duration-1000 ${
+        className={`absolute left-3 bottom-16 sm:left-4 sm:bottom-18 md:left-6 md:bottom-20 z-10 transition-all duration-1000 ${
           isVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4"
@@ -164,7 +166,7 @@ function Panel({ panel, isVisible, mousePosition, index }) {
         style={{ transitionDelay: `${panel.delay + 300}ms` }}
       >
         <p
-          className="text-sm font-mono uppercase tracking-widest transition-colors duration-300"
+          className="text-[10px] sm:text-xs md:text-sm font-mono uppercase tracking-widest transition-colors duration-300"
           style={{ color: panel.accent }}
         >
           {panel.subtitle}
@@ -173,7 +175,7 @@ function Panel({ panel, isVisible, mousePosition, index }) {
 
       {/* CTA Button - Neon Pulse */}
       <div
-        className={`absolute bottom-6 left-6 z-10 transition-all duration-1000 ${
+        className={`absolute bottom-3 left-3 sm:bottom-4 sm:left-4 md:bottom-6 md:left-6 z-10 transition-all duration-1000 ${
           isVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4"
@@ -181,7 +183,7 @@ function Panel({ panel, isVisible, mousePosition, index }) {
         style={{ transitionDelay: `${panel.delay + 600}ms` }}
       >
         <button
-          className="group/btn relative overflow-hidden rounded-lg border-2 px-6 py-3 font-mono text-sm font-semibold uppercase tracking-wider transition-all duration-300"
+          className="group/btn relative overflow-hidden rounded-lg border-2 px-4 py-2.5 sm:px-5 sm:py-2.5 md:px-6 md:py-3 font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300 touch-manipulation min-h-[44px] min-w-[100px]"
           style={{
             borderColor: panel.accent,
             color: panel.accent,
@@ -190,7 +192,7 @@ function Panel({ panel, isVisible, mousePosition, index }) {
         >
           <span className="relative z-10">EXPLORE</span>
           <div
-            className="absolute inset-0 transition-transform duration-300 group-hover/btn:translate-x-0 -translate-x-full"
+            className="absolute inset-0 transition-transform duration-300 group-hover/btn:translate-x-0 group-active/btn:translate-x-0 -translate-x-full"
             style={{ backgroundColor: `${panel.accent}20` }}
           />
         </button>

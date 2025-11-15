@@ -194,26 +194,26 @@ export default function SmartPicksAndFavorites() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#050b11] py-24"
+      className="relative w-full overflow-hidden bg-[#050b11] py-12 sm:py-16 md:py-20 lg:py-24"
     >
       <GridOverlay opacity={0.1} pulse={true} />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         {/* Smart Picks Section */}
-        <div className="mb-16">
+        <div className="mb-12 sm:mb-14 md:mb-16">
           <div
-            className={`mb-8 text-center transition-all duration-1000 ${
+            className={`mb-6 sm:mb-8 text-center transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
             }`}
           >
-            <h2 className="mb-2 text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
+            <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
               SMART PICKS
             </h2>
             <p className="font-mono text-sm text-[#6c7383]">
               // PRICE FILTER MATRIX
             </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             {SMART_PICKS.map((pick, index) => (
               <Link
                 key={pick.id}
@@ -269,14 +269,14 @@ export default function SmartPicksAndFavorites() {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <h2 className="mb-2 text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
+            <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
               NOVEMBER FAVOURITES
             </h2>
             <p className="font-mono text-sm text-[#6c7383]">
               // SEASONAL OFFERS DATABASE
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {NOVEMBER_FAVORITES.map((favorite, index) => {
               const IconComponent = favorite.Icon;
               return (

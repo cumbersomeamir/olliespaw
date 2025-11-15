@@ -90,18 +90,18 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="relative w-full bg-[#040608] py-16">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="relative w-full bg-[#040608] py-8 sm:py-12 md:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header Section */}
         <div
-          className={`mb-12 text-center transition-all duration-1000 ${
+          className={`mb-8 sm:mb-10 md:mb-12 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
           }`}
         >
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
+          <h3 className="mb-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
             FEATURED PRODUCTS
           </h3>
-          <h2 className="mb-6 text-4xl font-bold uppercase tracking-tight text-[#f5f7ff] md:text-5xl">
+          <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight text-[#f5f7ff] px-2">
             FROM OUR KITCHEN TO YOURS
           </h2>
           <Link
@@ -130,11 +130,11 @@ export default function FeaturedProducts() {
           {/* Scroll Buttons */}
           <button
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full border-2 border-[#00ff95] bg-[#070f17]/90 p-3 text-[#00ff95] shadow-lg backdrop-blur-sm transition-all hover:bg-[#00ff95] hover:text-[#040608] hover:scale-110"
+            className="absolute left-2 sm:left-0 top-1/2 z-10 -translate-y-1/2 rounded-full border-2 border-[#00ff95] bg-[#070f17]/90 p-2 sm:p-3 text-[#00ff95] shadow-lg backdrop-blur-sm transition-all hover:bg-[#00ff95] hover:text-[#040608] hover:scale-110 active:scale-95 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Scroll left"
           >
             <svg
-              className="h-6 w-6"
+              className="h-5 w-5 sm:h-6 sm:w-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -150,11 +150,11 @@ export default function FeaturedProducts() {
 
           <button
             onClick={scrollRight}
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full border-2 border-[#00ff95] bg-[#070f17]/90 p-3 text-[#00ff95] shadow-lg backdrop-blur-sm transition-all hover:bg-[#00ff95] hover:text-[#040608] hover:scale-110"
+            className="absolute right-2 sm:right-0 top-1/2 z-10 -translate-y-1/2 rounded-full border-2 border-[#00ff95] bg-[#070f17]/90 p-2 sm:p-3 text-[#00ff95] shadow-lg backdrop-blur-sm transition-all hover:bg-[#00ff95] hover:text-[#040608] hover:scale-110 active:scale-95 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Scroll right"
           >
             <svg
-              className="h-6 w-6"
+              className="h-5 w-5 sm:h-6 sm:w-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -171,7 +171,7 @@ export default function FeaturedProducts() {
           {/* Product Cards Carousel */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 scroll-smooth px-4"
+            className="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-hide pb-4 scroll-smooth px-2 sm:px-4 snap-x snap-mandatory"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -206,10 +206,10 @@ function MatrixProductCard({ product, index, isVisible, isCenter, distance }) {
 
   return (
     <div
-      className="group relative flex-shrink-0 transition-all duration-500"
+      className="group relative flex-shrink-0 transition-all duration-500 snap-center"
       style={{
-        minWidth: "320px",
-        maxWidth: "320px",
+        minWidth: "280px",
+        maxWidth: "280px",
         transform: `scale(${scale})`,
         opacity: opacity,
         filter: isCenter ? "brightness(1.1)" : "brightness(0.8)",
@@ -218,9 +218,9 @@ function MatrixProductCard({ product, index, isVisible, isCenter, distance }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={`/products/${product.slug}`}>
+      <Link href={`/products/${product.slug}`} className="touch-manipulation">
         <div
-          className={`relative h-[480px] overflow-hidden rounded-2xl border-2 bg-[#070f17] p-6 transition-all duration-300 ${
+          className={`relative h-[420px] sm:h-[460px] md:h-[480px] overflow-hidden rounded-xl sm:rounded-2xl border-2 bg-[#070f17] p-4 sm:p-5 md:p-6 transition-all duration-300 ${
             isCenter
               ? "border-[#00ff95] shadow-[0_0_40px_rgba(0,255,149,0.4)]"
               : "border-[rgba(0,255,149,0.2)]"
