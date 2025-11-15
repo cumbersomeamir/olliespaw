@@ -23,10 +23,10 @@ const SAMPLE_PRODUCTS = [
 export default function ProductsPage() {
   return (
     <section className="min-h-screen bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-10">
-        <div className="mb-6 flex items-start justify-between">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8 md:py-10">
+        <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start justify-between gap-4">
           <div>
-            <h1 className="font-serif text-3xl md:text-4xl text-foreground">bestsellers</h1>
+            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground">bestsellers</h1>
             <p className="mt-2 text-sm text-foreground/70">
               Discover our demanding curation of the best pieces of pet wellness from around the country.
             </p>
@@ -34,7 +34,7 @@ export default function ProductsPage() {
           <div className="text-sm text-foreground/60">75 products</div>
         </div>
 
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <FiltersBar />
         </div>
       </div>

@@ -68,8 +68,8 @@ export default function ShopByPet() {
   }, []);
 
   return (
-    <section className="relative w-full bg-[#040608] py-16">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="relative w-full bg-[#040608] py-8 sm:py-12 md:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Pagination Dots */}
         <div className="mb-6 flex justify-center gap-2">
           <div className="h-2 w-2 rounded-full bg-[#00ff95] matrix-neon-pulse" />

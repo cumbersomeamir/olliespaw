@@ -24,9 +24,9 @@ export default function Footer() {
     <footer className="relative mt-16 border-t border-[rgba(0,255,149,0.2)] bg-[#040608]">
       <GridOverlay opacity={0.1} pulse={true} />
 
-      <div className="relative mx-auto max-w-7xl px-6 py-12">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-10 md:py-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
           {/* Column 1: Brand */}
           <div
             className={`transition-all duration-1000 ${

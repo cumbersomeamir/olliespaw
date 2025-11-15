@@ -115,14 +115,14 @@ export default function AboutPage() {
       </div>
       <GridOverlay opacity={0.1} pulse={true} />
 
-      <div ref={sectionRef} className="relative mx-auto max-w-5xl px-6 py-24">
+      <div ref={sectionRef} className="relative mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-16 md:py-20 lg:py-24">
         {/* Header */}
         <div
-          className={`mb-16 text-center transition-all duration-1000 ${
+          className={`mb-12 sm:mb-14 md:mb-16 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
           }`}
         >
-          <h1 className="mb-4 text-5xl font-bold uppercase tracking-tight text-[#f5f7ff] md:text-6xl">
+          <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-[#f5f7ff]">
             ABOUT OLLIE'S PAW
           </h1>
           <p className="font-mono text-sm text-[#6c7383]">
@@ -132,7 +132,7 @@ export default function AboutPage() {
 
         {/* Tagline */}
         <div
-          className="relative mb-16 rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-8 text-center transition-all duration-1000"
+          className="relative mb-12 sm:mb-14 md:mb-16 rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-6 sm:p-7 md:p-8 text-center transition-all duration-1000"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? "translateY(0)" : "translateY(20px)",
@@ -145,10 +145,10 @@ export default function AboutPage() {
         </div>
 
         {/* Main Story Section */}
-        <div className="mb-16 space-y-8">
+        <div className="mb-12 sm:mb-14 md:mb-16 space-y-6 sm:space-y-8">
           {/* Story Part 1 */}
           <div
-            className="relative rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-8 transition-all duration-1000"
+            className="relative rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-6 sm:p-7 md:p-8 transition-all duration-1000"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(20px)",
@@ -193,7 +193,7 @@ export default function AboutPage() {
 
           {/* Story Part 2 */}
           <div
-            className="relative rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-8 transition-all duration-1000"
+            className="relative rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-6 sm:p-7 md:p-8 transition-all duration-1000"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(20px)",
@@ -243,7 +243,7 @@ export default function AboutPage() {
 
           {/* Vision */}
           <div
-            className="relative rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-8 transition-all duration-1000"
+            className="relative rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-6 sm:p-7 md:p-8 transition-all duration-1000"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(20px)",
@@ -293,21 +293,21 @@ export default function AboutPage() {
         </div>
 
         {/* Values Section */}
-        <div className="mb-16">
+        <div className="mb-12 sm:mb-14 md:mb-16">
           <div
-            className={`mb-8 text-center transition-all duration-1000 ${
+            className={`mb-6 sm:mb-8 text-center transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
             }`}
             style={{ transitionDelay: "800ms" }}
           >
-            <h2 className="mb-2 text-3xl font-bold uppercase tracking-tight text-[#f5f7ff]">
+            <h2 className="mb-2 text-2xl sm:text-3xl font-bold uppercase tracking-tight text-[#f5f7ff]">
               OUR VALUES
             </h2>
             <p className="font-mono text-sm text-[#6c7383]">
               // CORE PRINCIPLES MATRIX
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
             {values.map((value, index) => (
               <ValueCard
                 key={index}
@@ -324,7 +324,7 @@ export default function AboutPage() {
 
         {/* Target Audience */}
         <div
-          className="relative rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-8 transition-all duration-1000"
+          className="relative rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-6 sm:p-7 md:p-8 transition-all duration-1000"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? "translateY(0)" : "translateY(20px)",

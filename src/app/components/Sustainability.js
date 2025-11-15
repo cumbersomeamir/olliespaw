@@ -184,18 +184,18 @@ export default function Sustainability() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#050b11] py-24"
+      className="relative w-full overflow-hidden bg-[#050b11] py-12 sm:py-16 md:py-20 lg:py-24"
     >
       <GridOverlay opacity={0.1} pulse={true} />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div
-          className={`mb-16 text-center transition-all duration-1000 ${
+          className={`mb-12 sm:mb-14 md:mb-16 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
           }`}
         >
-          <h2 className="mb-4 text-4xl font-bold uppercase tracking-tight text-[#f5f7ff] md:text-5xl">
+          <h2 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight text-[#f5f7ff]">
             SUSTAINABILITY & IMPACT
           </h2>
           <p className="font-mono text-sm text-[#6c7383]">
@@ -204,7 +204,7 @@ export default function Sustainability() {
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-12 lg:grid-cols-2">
           {/* Left: Text Content */}
           <div
             className={`space-y-6 transition-all duration-1000 ${

@@ -140,14 +140,14 @@ export default function ShippingPolicyPage() {
       </div>
       <GridOverlay opacity={0.1} pulse={true} />
 
-      <div ref={sectionRef} className="relative mx-auto max-w-4xl px-6 py-24">
+      <div ref={sectionRef} className="relative mx-auto max-w-4xl px-4 sm:px-6 py-12 sm:py-16 md:py-20 lg:py-24">
         {/* Header */}
         <div
-          className={`mb-16 text-center transition-all duration-1000 ${
+          className={`mb-12 sm:mb-14 md:mb-16 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
           }`}
         >
-          <h1 className="mb-4 text-5xl font-bold uppercase tracking-tight text-[#f5f7ff] md:text-6xl">
+          <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-[#f5f7ff]">
             SHIPPING POLICY
           </h1>
           <p className="font-mono text-sm text-[#6c7383]">
@@ -156,7 +156,7 @@ export default function ShippingPolicyPage() {
         </div>
 
         {/* Info Cards */}
-        <div className="mb-16 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="mb-12 sm:mb-14 md:mb-16 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
           {infoCards.map((card, index) => (
             <InfoCard
               key={index}

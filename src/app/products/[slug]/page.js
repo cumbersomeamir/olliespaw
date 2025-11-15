@@ -50,8 +50,8 @@ export default function ProductDetailPage({ params }) {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12">
           {/* Left: Product Images */}
           <div className="lg:col-span-5">
             <ProductImageGallery product={product} />

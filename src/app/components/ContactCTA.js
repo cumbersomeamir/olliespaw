@@ -59,18 +59,18 @@ export default function ContactCTA() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#050b11] py-24"
+      className="relative w-full overflow-hidden bg-[#050b11] py-12 sm:py-16 md:py-20 lg:py-24"
     >
       <GridOverlay opacity={0.1} pulse={true} />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div
-          className={`mb-16 text-center transition-all duration-1000 ${
+          className={`mb-12 sm:mb-14 md:mb-16 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
           }`}
         >
-          <h2 className="mb-4 text-4xl font-bold uppercase tracking-tight text-[#f5f7ff] md:text-5xl">
+          <h2 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight text-[#f5f7ff]">
             GET IN TOUCH
           </h2>
           <p className="font-mono text-sm text-[#6c7383]">
@@ -79,12 +79,12 @@ export default function ContactCTA() {
         </div>
 
         {/* Contact Methods Grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
           {contactMethods.map((method, index) => (
             <Link
               key={method.id}
               href={method.href}
-              className="group relative overflow-hidden rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-8 transition-all duration-500 hover:border-[#00ff95] hover:shadow-[0_0_40px_rgba(0,255,149,0.4)]"
+              className="group relative overflow-hidden rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-6 sm:p-7 md:p-8 transition-all duration-500 hover:border-[#00ff95] hover:shadow-[0_0_40px_rgba(0,255,149,0.4)]"
               onMouseEnter={() => setHoveredButton(method.id)}
               onMouseLeave={() => setHoveredButton(null)}
               style={{
@@ -161,14 +161,14 @@ export default function ContactCTA() {
 
         {/* CTA Button */}
         <div
-          className={`mt-16 text-center transition-all duration-1000 ${
+          className={`mt-12 sm:mt-14 md:mt-16 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
           style={{ transitionDelay: "600ms" }}
         >
           <Link
             href="/contact"
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl border-2 border-[#00ff95] bg-transparent px-10 py-5 font-mono text-base font-bold uppercase tracking-wider text-[#00ff95] transition-all duration-300 hover:bg-[#00ff95] hover:text-[#040608] hover:scale-105 hover:shadow-[0_0_30px_rgba(0,255,149,0.5)]"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl border-2 border-[#00ff95] bg-transparent px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 font-mono text-sm sm:text-base font-bold uppercase tracking-wider text-[#00ff95] transition-all duration-300 hover:bg-[#00ff95] hover:text-[#040608] hover:scale-105 hover:shadow-[0_0_30px_rgba(0,255,149,0.5)] touch-manipulation min-h-[44px]"
             onMouseEnter={() => setHoveredButton("cta")}
             onMouseLeave={() => setHoveredButton(null)}
           >

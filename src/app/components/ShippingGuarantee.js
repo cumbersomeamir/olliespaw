@@ -135,18 +135,18 @@ export default function ShippingGuarantee() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#040608] py-24"
+      className="relative w-full overflow-hidden bg-[#040608] py-12 sm:py-16 md:py-20 lg:py-24"
     >
       <GridOverlay opacity={0.1} pulse={true} />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div
-          className={`mb-16 text-center transition-all duration-1000 ${
+          className={`mb-12 sm:mb-14 md:mb-16 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
           }`}
         >
-          <h2 className="mb-4 text-4xl font-bold uppercase tracking-tight text-[#f5f7ff] md:text-5xl">
+          <h2 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight text-[#f5f7ff]">
             SHIPPING & GUARANTEES
           </h2>
           <p className="font-mono text-sm text-[#6c7383]">
@@ -155,7 +155,7 @@ export default function ShippingGuarantee() {
         </div>
 
         {/* Guarantees Grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
           {GUARANTEES.map((guarantee, index) => (
             <div
               key={guarantee.id}

@@ -182,18 +182,18 @@ export default function QualityProcess() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#040608] py-24"
+      className="relative w-full overflow-hidden bg-[#040608] py-12 sm:py-16 md:py-20 lg:py-24"
     >
       <GridOverlay opacity={0.1} pulse={true} />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div
-          className={`mb-16 text-center transition-all duration-1000 ${
+          className={`mb-12 sm:mb-14 md:mb-16 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
           }`}
         >
-          <h2 className="mb-4 text-4xl font-bold uppercase tracking-tight text-[#f5f7ff] md:text-5xl">
+          <h2 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight text-[#f5f7ff]">
             QUALITY PROCESS
           </h2>
           <p className="font-mono text-sm text-[#6c7383]">
@@ -202,8 +202,8 @@ export default function QualityProcess() {
         </div>
 
         {/* Timeline */}
-        <div className="mb-16">
-          <div className="flex items-start justify-between">
+        <div className="mb-12 sm:mb-14 md:mb-16 overflow-x-auto">
+          <div className="flex items-start justify-between min-w-[600px] sm:min-w-0">
             {PROCESS_STEPS.map((step, index) => (
               <div key={step.id} className="flex-1">
                 <TimelineMarker
@@ -218,14 +218,14 @@ export default function QualityProcess() {
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-12 lg:grid-cols-2">
           {/* Left: Active Step Details */}
           <div
             className={`space-y-6 transition-all duration-500 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
             }`}
           >
-            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-8">
+            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-6 sm:p-7 md:p-8">
               <GridOverlay opacity={0.1} />
 
               <div
@@ -272,7 +272,7 @@ export default function QualityProcess() {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-8">
+            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-6 sm:p-7 md:p-8">
               <GridOverlay opacity={0.1} />
 
               <h3 className="mb-6 font-mono text-sm uppercase tracking-wider text-[#00ff95]">

@@ -12,10 +12,10 @@ export default function HomePetCategories() {
 
   return (
     <section className="w-full bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-10">
-        <div className="mb-6 flex items-start justify-between gap-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8 md:py-10">
+        <div className="mb-4 sm:mb-6 flex items-start justify-between gap-4">
           <div>
-            <h2 className="font-serif text-2xl md:text-3xl">our products</h2>
+            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl">our products</h2>
             <p className="mt-1 text-sm text-foreground/70">
               A carefully curated collection bringing together the best for every pet.
             </p>
@@ -36,7 +36,7 @@ export default function HomePetCategories() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 rounded-xl bg-foreground/[0.04] p-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 rounded-xl bg-foreground/[0.04] p-4 sm:p-6 md:p-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8">
           {items.map((i) => (
             <CategoryCard
               key={i.key}

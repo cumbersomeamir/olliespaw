@@ -47,15 +47,15 @@ export default function LivePetGridFeed() {
   }, []);
 
   return (
-    <section className="relative w-full bg-[#040608] py-16">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="relative w-full bg-[#040608] py-8 sm:py-12 md:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div
-          className={`mb-12 text-center transition-all duration-1000 ${
+          className={`mb-8 sm:mb-10 md:mb-12 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
           }`}
         >
-          <h2 className="mb-2 text-2xl font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
+          <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
             LIVE PET GRID FEED
           </h2>
           <p className="font-mono text-sm text-[#6c7383]">

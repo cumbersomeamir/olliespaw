@@ -77,7 +77,7 @@ export default function OurStory() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#040608] py-24"
+      className="relative w-full overflow-hidden bg-[#040608] py-12 sm:py-16 md:py-20 lg:py-24"
     >
       {/* Background Layers with Parallax */}
       <div
@@ -100,14 +100,14 @@ export default function OurStory() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div
-          className={`mb-16 text-center transition-all duration-1000 ${
+          className={`mb-12 sm:mb-14 md:mb-16 text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
           }`}
         >
-          <h2 className="mb-4 text-4xl font-bold uppercase tracking-tight text-[#f5f7ff] md:text-5xl">
+          <h2 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight text-[#f5f7ff]">
             OUR STORY
           </h2>
           <p className="font-mono text-sm text-[#6c7383]">
@@ -116,7 +116,7 @@ export default function OurStory() {
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 sm:gap-10 md:gap-12 lg:grid-cols-2">
           {/* Left: Story Text with Typewriter */}
           <div
             className={`space-y-6 transition-all duration-1000 ${
@@ -124,7 +124,7 @@ export default function OurStory() {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17]/80 p-8 backdrop-blur-sm">
+            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17]/80 p-6 sm:p-7 md:p-8 backdrop-blur-sm">
               <GridOverlay opacity={0.1} />
               
               {/* Hologram Displacement Effect */}
