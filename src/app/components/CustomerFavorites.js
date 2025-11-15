@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import GridOverlay from "@/components/matrix/GridOverlay";
-import GlitchText from "@/components/matrix/GlitchText";
 
 const FAVORITE_CATEGORIES = [
   {
@@ -121,7 +120,7 @@ export default function CustomerFavorites() {
           }`}
         >
           <h2 className="mb-2 text-2xl font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
-            <GlitchText duration={2000}>CUSTOMER FAVORITES</GlitchText>
+            CUSTOMER FAVORITES
           </h2>
           <p className="font-mono text-sm text-[#6c7383]">
             // SIGNAL-BASED RANKING

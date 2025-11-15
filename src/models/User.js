@@ -1,11 +1,11 @@
-import clientPromise from '@/lib/mongodb';
+import connectDB from '@/lib/mongodb';
 
 const DB_NAME = 'olliespaw';
 const COLLECTION_NAME = 'login';
 
 export async function createUser(userData) {
   try {
-    const client = await clientPromise;
+    const client = await connectDB();
     const db = client.db(DB_NAME);
     const collection = db.collection(COLLECTION_NAME);
 
@@ -37,7 +37,7 @@ export async function createUser(userData) {
 
 export async function findUserByEmail(email) {
   try {
-    const client = await clientPromise;
+    const client = await connectDB();
     const db = client.db(DB_NAME);
     const collection = db.collection(COLLECTION_NAME);
     
@@ -49,7 +49,7 @@ export async function findUserByEmail(email) {
 
 export async function findUserByMobile(mobileNumber) {
   try {
-    const client = await clientPromise;
+    const client = await connectDB();
     const db = client.db(DB_NAME);
     const collection = db.collection(COLLECTION_NAME);
     
@@ -61,7 +61,7 @@ export async function findUserByMobile(mobileNumber) {
 
 export async function findUserByEmailOrMobile(email, mobileNumber) {
   try {
-    const client = await clientPromise;
+    const client = await connectDB();
     const db = client.db(DB_NAME);
     const collection = db.collection(COLLECTION_NAME);
     

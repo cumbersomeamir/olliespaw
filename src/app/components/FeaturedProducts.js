@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import GridOverlay from "@/components/matrix/GridOverlay";
-import GlitchText from "@/components/matrix/GlitchText";
 
 const FEATURED_PRODUCTS = [
   {
@@ -100,7 +99,7 @@ export default function FeaturedProducts() {
           }`}
         >
           <h3 className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
-            <GlitchText duration={2000}>FEATURED PRODUCTS</GlitchText>
+            FEATURED PRODUCTS
           </h3>
           <h2 className="mb-6 text-4xl font-bold uppercase tracking-tight text-[#f5f7ff] md:text-5xl">
             FROM OUR KITCHEN TO YOURS

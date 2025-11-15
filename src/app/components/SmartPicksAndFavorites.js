@@ -1,15 +1,17 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import GridOverlay from "@/components/matrix/GridOverlay";
 
 const SMART_PICKS = [
-  { id: 1, price: 10, label: "UNDER ₹ 10" },
-  { id: 2, price: 20, label: "UNDER ₹ 20" },
-  { id: 3, price: 30, label: "UNDER ₹ 30" },
-  { id: 4, price: 40, label: "UNDER ₹ 40" },
+  { id: 1, price: 10, label: "UNDER ₹ 10", color: "#00ff95" },
+  { id: 2, price: 20, label: "UNDER ₹ 20", color: "#00e0ff" },
+  { id: 3, price: 30, label: "UNDER ₹ 30", color: "#7c5cff" },
+  { id: 4, price: 40, label: "UNDER ₹ 40", color: "#ffed4f" },
 ];
 
-// SVG Icon Components - Professional line art style
+// SVG Icon Components - Matrix wireframe style
 const BoneIcon = () => (
   <svg
     viewBox="0 0 24 24"
@@ -124,6 +126,7 @@ const NOVEMBER_FAVORITES = [
     discount: "Upto 50% off",
     Icon: BoneIcon,
     href: "/products?category=dry-food",
+    color: "#00ff95",
   },
   {
     id: "cat-litter",
@@ -131,6 +134,7 @@ const NOVEMBER_FAVORITES = [
     discount: "Upto 30% off",
     Icon: CatLitterIcon,
     href: "/products?category=cat-litter",
+    color: "#00e0ff",
   },
   {
     id: "treats",
@@ -138,6 +142,7 @@ const NOVEMBER_FAVORITES = [
     discount: "Upto 40% off",
     Icon: TreatsIcon,
     href: "/products?category=treats",
+    color: "#7c5cff",
   },
   {
     id: "beds",
@@ -145,6 +150,7 @@ const NOVEMBER_FAVORITES = [
     price: "start from ₹ 25",
     Icon: BedIcon,
     href: "/products?category=beds",
+    color: "#ffed4f",
   },
   {
     id: "toys",
@@ -152,6 +158,7 @@ const NOVEMBER_FAVORITES = [
     price: "under ₹ 40",
     Icon: ToysIcon,
     href: "/products?category=toys",
+    color: "#ff3670",
   },
   {
     id: "collar-harness",
@@ -159,37 +166,95 @@ const NOVEMBER_FAVORITES = [
     price: "under ₹ 39",
     Icon: CollarHarnessIcon,
     href: "/products?category=collar-harness",
+    color: "#00ff95",
   },
 ];
 
 export default function SmartPicksAndFavorites() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="w-full bg-background py-12">
-      <div className="mx-auto max-w-7xl px-6">
+    <section
+      ref={sectionRef}
+      className="relative w-full overflow-hidden bg-[#050b11] py-24"
+    >
+      <GridOverlay opacity={0.1} pulse={true} />
+
+      <div className="relative mx-auto max-w-7xl px-6">
         {/* Smart Picks Section */}
-        <div className="mb-12">
-          <h2 className="mb-6 text-center text-2xl font-semibold text-foreground">
-            Smart Picks
-          </h2>
+        <div className="mb-16">
+          <div
+            className={`mb-8 text-center transition-all duration-1000 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
+            }`}
+          >
+            <h2 className="mb-2 text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
+              SMART PICKS
+            </h2>
+            <p className="font-mono text-sm text-[#6c7383]">
+              // PRICE FILTER MATRIX
+            </p>
+          </div>
           <div className="flex flex-wrap justify-center gap-4">
-            {SMART_PICKS.map((pick) => (
+            {SMART_PICKS.map((pick, index) => (
               <Link
                 key={pick.id}
                 href={`/products?maxPrice=${pick.price}`}
                 className="group relative"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                  transitionDelay: `${index * 100}ms`,
+                }}
               >
-                <div className="flex h-32 w-72 items-center border-2 border-primary bg-background transition-transform hover:scale-105">
+                <div className="relative flex h-32 w-72 items-center overflow-hidden rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] transition-all duration-500 hover:border-[#00ff95] hover:shadow-[0_0_30px_rgba(0,255,149,0.3)]">
+                  <GridOverlay opacity={0.05} />
+
                   {/* Left: EVERYTHING (vertical) */}
-                  <div className="flex h-full flex-col items-center justify-center border-r-2 border-dashed border-foreground/30 px-3">
-                    <span className="-rotate-90 whitespace-nowrap text-xs font-medium text-foreground">
+                  <div className="flex h-full flex-col items-center justify-center border-r-2 border-dashed border-[rgba(0,255,149,0.3)] px-4">
+                    <span className="-rotate-90 whitespace-nowrap font-mono text-xs font-bold uppercase tracking-wider text-[#6c7383] transition-colors duration-300 group-hover:text-[#00ff95]">
                       EVERYTHING
                     </span>
                   </div>
+
                   {/* Right: UNDER ₹ X */}
-                  <div className="flex flex-1 flex-col items-center justify-center px-3">
-                    <p className="text-xs font-medium text-foreground">UNDER</p>
-                    <p className="text-2xl font-bold text-primary">₹ {pick.price}</p>
+                  <div className="flex flex-1 flex-col items-center justify-center px-4">
+                    <p className="font-mono text-xs font-medium uppercase tracking-wider text-[#6c7383]">
+                      UNDER
+                    </p>
+                    <p
+                      className="font-mono text-3xl font-bold transition-colors duration-300"
+                      style={{ color: pick.color }}
+                    >
+                      ₹ {pick.price}
+                    </p>
                   </div>
+
+                  {/* Hover Glow */}
+                  <div
+                    className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{
+                      background: `radial-gradient(circle at center, ${pick.color}20 0%, transparent 70%)`,
+                    }}
+                  />
                 </div>
               </Link>
             ))}
@@ -198,42 +263,96 @@ export default function SmartPicksAndFavorites() {
 
         {/* November Favourites Section */}
         <div>
-          <h2 className="mb-6 text-center text-2xl font-semibold text-foreground">
-            November Favourites
-          </h2>
+          <div
+            className={`mb-8 text-center transition-all duration-1000 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
+            }`}
+            style={{ transitionDelay: "200ms" }}
+          >
+            <h2 className="mb-2 text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
+              NOVEMBER FAVOURITES
+            </h2>
+            <p className="font-mono text-sm text-[#6c7383]">
+              // SEASONAL OFFERS DATABASE
+            </p>
+          </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {NOVEMBER_FAVORITES.map((favorite) => {
+            {NOVEMBER_FAVORITES.map((favorite, index) => {
               const IconComponent = favorite.Icon;
               return (
                 <Link
                   key={favorite.id}
                   href={favorite.href}
-                  className="group relative overflow-hidden rounded-lg bg-primary p-6 transition-transform hover:scale-105"
+                  className="group relative overflow-hidden rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-8 transition-all duration-500 hover:border-[#00ff95] hover:shadow-[0_0_40px_rgba(0,255,149,0.4)]"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible
+                      ? "translateY(0) scale(1)"
+                      : "translateY(30px) scale(0.9)",
+                    transitionDelay: `${300 + index * 100}ms`,
+                  }}
                 >
+                  <GridOverlay opacity={0.05} />
+
+                  {/* Scanline on Hover */}
+                  <div className="matrix-scanline absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                  {/* Background Glow */}
+                  <div
+                    className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{
+                      background: `radial-gradient(circle at center, ${favorite.color}20 0%, transparent 70%)`,
+                    }}
+                  />
+
                   {/* Product Icon */}
-                  <div className="mb-4 flex h-48 items-center justify-center text-white">
-                    <IconComponent />
+                  <div className="relative mb-6 flex h-48 items-center justify-center">
+                    <div
+                      className="transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        color: favorite.color,
+                        filter: `drop-shadow(0 0 20px ${favorite.color}60)`,
+                      }}
+                    >
+                      <IconComponent />
+                    </div>
                   </div>
 
                   {/* Discount/Price Text */}
                   <div className="relative">
                     {favorite.discount ? (
-                      <p className="text-3xl font-bold text-white">
+                      <p
+                        className="mb-2 font-mono text-3xl font-bold transition-colors duration-300"
+                        style={{ color: favorite.color }}
+                      >
                         {favorite.discount}
                       </p>
                     ) : (
-                      <div className="flex items-baseline gap-2">
-                        <p className="text-lg text-white/80">{favorite.price.split("₹")[0]}</p>
-                        <p className="text-3xl font-bold text-white">
+                      <div className="mb-2 flex items-baseline gap-2">
+                        <p className="font-mono text-lg text-[#6c7383]">
+                          {favorite.price.split("₹")[0]}
+                        </p>
+                        <p
+                          className="font-mono text-3xl font-bold transition-colors duration-300"
+                          style={{ color: favorite.color }}
+                        >
                           ₹ {favorite.price.match(/\d+/)?.[0]}
                         </p>
                       </div>
                     )}
-                    {/* Category Name - lighter color */}
-                    <p className="mt-2 text-lg font-medium text-white/75">
+                    {/* Category Name */}
+                    <p className="font-mono text-lg font-medium uppercase tracking-wider text-[#a7b2c7] transition-colors duration-300 group-hover:text-[#f5f7ff]">
                       {favorite.name}
                     </p>
                   </div>
+
+                  {/* Corner Accent */}
+                  <div
+                    className="absolute right-0 top-0 h-20 w-20 opacity-20 transition-opacity duration-300 group-hover:opacity-40"
+                    style={{
+                      background: `linear-gradient(135deg, ${favorite.color}40 0%, transparent 50%)`,
+                    }}
+                  />
                 </Link>
               );
             })}
@@ -243,4 +362,3 @@ export default function SmartPicksAndFavorites() {
     </section>
   );
 }
-

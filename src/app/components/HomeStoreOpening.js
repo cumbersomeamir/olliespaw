@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import CodeRain from "@/components/matrix/CodeRain";
 import GridOverlay from "@/components/matrix/GridOverlay";
-import GlitchText from "@/components/matrix/GlitchText";
 
 export default function HomeStoreOpening() {
   const [isVisible, setIsVisible] = useState(false);
@@ -150,14 +149,8 @@ function Panel({ panel, isVisible, mousePosition, index }) {
         }`}
         style={{ transitionDelay: `${panel.delay}ms` }}
       >
-        <h2 className="font-sans text-[48px] font-extrabold uppercase leading-none tracking-tight md:text-[72px] lg:text-[92px]">
-          <GlitchText
-            className="block text-white"
-            duration={3000}
-            glitchOnHover={true}
-          >
-            {panel.label}
-          </GlitchText>
+        <h2 className="font-sans text-[48px] font-extrabold uppercase leading-none tracking-tight md:text-[72px] lg:text-[92px] block text-white">
+          {panel.label}
         </h2>
       </div>
 
@@ -203,32 +196,6 @@ function Panel({ panel, isVisible, mousePosition, index }) {
         </button>
       </div>
 
-      {/* Bottom Info - Flicker On */}
-      <div
-        className={`pointer-events-none absolute inset-x-0 bottom-6 z-10 flex items-end justify-between px-6 text-white transition-all duration-1000 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
-        style={{ transitionDelay: `${panel.delay + 900}ms` }}
-      >
-        <div className="text-[12px] leading-[1.25] tracking-widest md:text-[14px]">
-          <p className="matrix-flicker">27 RUE</p>
-          <p className="matrix-flicker" style={{ animationDelay: "0.1s" }}>
-            DE SAINTONGE
-          </p>
-          <p className="matrix-flicker" style={{ animationDelay: "0.2s" }}>
-            75003 PARIS
-          </p>
-        </div>
-        <div className="text-right text-[12px] leading-[1.25] tracking-widest md:text-[14px]">
-          <p className="matrix-flicker">A PARTIR</p>
-          <p className="matrix-flicker" style={{ animationDelay: "0.1s" }}>
-            DU 14.11.25
-          </p>
-          <p className="matrix-flicker" style={{ animationDelay: "0.2s" }}>
-            11H00.19H30
-          </p>
-        </div>
-      </div>
     </Link>
   );
 }

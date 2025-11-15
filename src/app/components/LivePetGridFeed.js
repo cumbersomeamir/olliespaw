@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import GridOverlay from "@/components/matrix/GridOverlay";
-import GlitchText from "@/components/matrix/GlitchText";
 
 const feedData = [
   { id: 1, event: "Dogs bought today", count: 247, category: "DOG FOOD" },
@@ -57,7 +56,7 @@ export default function LivePetGridFeed() {
           }`}
         >
           <h2 className="mb-2 text-2xl font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
-            <GlitchText duration={2000}>LIVE PET GRID FEED</GlitchText>
+            LIVE PET GRID FEED
           </h2>
           <p className="font-mono text-sm text-[#6c7383]">
             // REAL-TIME SIGNAL PROCESSING
