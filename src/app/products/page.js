@@ -5,24 +5,40 @@ export const metadata = {
   title: "Products — Ollie’s Paw",
 };
 
-const SAMPLE_PRODUCTS = [
-  { id: "1", title: "NourishMax Kibble – Chicken", brand: "Ollie’s Paw", price: "₹ 580.00", badge: "exclusive" },
-  { id: "2", title: "Shine & Coat Supplement", brand: "Ollie’s Paw", price: "₹ 320.00", badge: "new" },
-  { id: "3", title: "Calm & Comfort Chews", brand: "Ollie’s Paw", price: "₹ 195.00" },
-  { id: "4", title: "Daily Multivitamin Bites", brand: "Ollie’s Paw", price: "₹ 140.00" },
-  { id: "5", title: "Classic Leash – Forest Green", brand: "Ollie’s Paw", price: "₹ 209.00", badge: "low" },
-  { id: "6", title: "Hydrate Gentle Shampoo", brand: "Ollie’s Paw", price: "₹ 165.00" },
-  { id: "7", title: "Travel Tote – Moss", brand: "Ollie’s Paw", price: "₹ 195.00" },
-  { id: "8", title: "Cozy Hoodie – Heather Grey", brand: "Ollie’s Paw", price: "₹ 140.00" },
-  { id: "9", title: "Raw Denim Treat Pouch", brand: "Ollie’s Paw", price: "₹ 209.00", badge: "low" },
-  { id: "10", title: "Shaggy Dog Sweater – Dark Gray", brand: "Ollie’s Paw", price: "₹ 165.00" },
-  { id: "11", title: "Corduroy Shirt – Olive", brand: "Ollie’s Paw", price: "₹ 195.00" },
-  { id: "12", title: "Crewneck – Forest Green", brand: "Ollie’s Paw", price: "₹ 120.00" },
-];
+async function fetchProducts() {
+  try {
+    // In server components, use absolute URL or relative path
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/products`, {
+      // Next.js fetch caching config for server components
+      next: { revalidate: 0 }, // Always fetch fresh data
+    });
+    if (!res.ok) throw new Error("Failed");
+    const data = await res.json();
+    return Array.isArray(data.products) ? data.products : [];
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    // Return empty array on error, let the API handle fallback
+    return [];
+  }
+}
 
 export default function ProductsPage() {
+  // Convert server component to async and fetch data on the server
   return (
     <section className="min-h-screen bg-background">
+      {/* Using a client boundary for data fetch with Suspense is an option.
+          Here we fetch in a Server Component-compatible way */}
+      {/* eslint-disable-next-line react/jsx-no-undef */}
+      <ProductsPageContent />
+    </section>
+  );
+}
+
+async function ProductsPageContent() {
+  const products = await fetchProducts();
+  return (
+    <>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8 md:py-10">
         <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start justify-between gap-4">
           <div>
@@ -31,16 +47,14 @@ export default function ProductsPage() {
               Discover our demanding curation of the best pieces of pet wellness from around the country.
             </p>
           </div>
-          <div className="text-sm text-foreground/60">75 products</div>
+          <div className="text-sm text-foreground/60">{products.length} products</div>
         </div>
-
         <div className="mb-6 sm:mb-8">
           <FiltersBar />
         </div>
       </div>
-
-      <ProductsGrid products={SAMPLE_PRODUCTS} />
-    </section>
+      <ProductsGrid products={products} />
+    </>
   );
 }
 

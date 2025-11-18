@@ -43,7 +43,13 @@ export function CartProvider({ children }) {
 
   const getSubtotal = () => {
     return cartItems.reduce((sum, item) => {
-      const price = parseFloat(item.price.replace(/[₹,\s]/g, ""));
+      // Handle both number and string prices
+      let price = 0;
+      if (typeof item.price === "number") {
+        price = item.price;
+      } else if (typeof item.price === "string") {
+        price = parseFloat(item.price.replace(/[₹,\s]/g, "")) || 0;
+      }
       return sum + price * item.quantity;
     }, 0);
   };

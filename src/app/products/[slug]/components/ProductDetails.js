@@ -8,11 +8,26 @@ export default function ProductDetails({ product }) {
   const [quantity, setQuantity] = useState(1);
   const [selectedDelivery, setSelectedDelivery] = useState("standard");
 
-  const originalPrice = parseFloat(product.originalPrice || product.price.replace(/[₹,\s]/g, "")) * 1.2;
-  const currentPrice = parseFloat(product.price.replace(/[₹,\s]/g, ""));
-  const discount = Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
-  const savings = originalPrice - currentPrice;
+  // Handle price - can be number or string
+  const getNumericPrice = (price) => {
+    if (typeof price === "number") return price;
+    if (typeof price === "string") {
+      return parseFloat(price.replace(/[₹,\s]/g, "")) || 0;
+    }
+    return 0;
+  };
+
+  const currentPrice = getNumericPrice(product.price);
+  const originalPriceNum = product.originalPrice ? getNumericPrice(product.originalPrice) : currentPrice * 1.2;
+  const originalPrice = originalPriceNum;
+  const discount = originalPrice > currentPrice ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100) : 0;
+  const savings = originalPrice > currentPrice ? originalPrice - currentPrice : 0;
   const pricePerUnit = currentPrice / (product.weight || 1);
+  
+  // Format price for display
+  const formatPrice = (price) => {
+    return `₹ ${price.toFixed(2)}`;
+  };
 
   const handleAddToCart = () => {
     addToCart(product, product.size || "Standard", quantity);
@@ -74,10 +89,10 @@ export default function ProductDetails({ product }) {
               {discount}% Off
             </span>
           )}
-          <span className="text-2xl font-semibold text-foreground">{product.price}</span>
+          <span className="text-2xl font-semibold text-foreground">{formatPrice(currentPrice)}</span>
           {originalPrice > currentPrice && (
             <span className="text-sm text-foreground/60 line-through">
-              ₹ {originalPrice.toFixed(2)}
+              {formatPrice(originalPrice)}
             </span>
           )}
         </div>

@@ -5,48 +5,55 @@ import ProductDetails from "./components/ProductDetails";
 import BuyTogether from "./components/BuyTogether";
 import ProductTabs from "./components/ProductTabs";
 import SimilarProducts from "./components/SimilarProducts";
-
-// Mock product data - in real app, fetch by slug
-const PRODUCTS = {
-  "nourishmax-kibble-chicken": {
-    id: "1",
-    title: "NourishMax Kibble – Chicken 12kg",
-    brand: "Ollie's Paw",
-    price: "₹ 580.00",
-    originalPrice: 725,
-    weight: 12,
-    badge: "exclusive",
-  },
-  "shine-coat-supplement": {
-    id: "2",
-    title: "Shine & Coat Supplement",
-    brand: "Ollie's Paw",
-    price: "₹ 320.00",
-    originalPrice: 400,
-    weight: 1,
-    badge: "new",
-  },
-  "calm-comfort-chews": {
-    id: "3",
-    title: "Calm & Comfort Chews",
-    brand: "Ollie's Paw",
-    price: "₹ 195.00",
-    originalPrice: 240,
-    weight: 1,
-  },
-  "daily-multivitamin-bites": {
-    id: "4",
-    title: "Daily Multivitamin Bites",
-    brand: "Ollie's Paw",
-    price: "₹ 140.00",
-    originalPrice: 175,
-    weight: 1,
-  },
-};
+import { useEffect, useState, use } from "react";
 
 export default function ProductDetailPage({ params }) {
-  const slug = typeof params?.slug === "string" ? params.slug : "";
-  const product = PRODUCTS[slug] || PRODUCTS["nourishmax-kibble-chicken"];
+  const resolvedParams = use(params);
+  const slug = typeof resolvedParams?.slug === "string" ? resolvedParams.slug : "";
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    let mounted = true;
+    async function load() {
+      try {
+        const res = await fetch(`/api/products/${slug}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (mounted) setProduct(data.product);
+          return;
+        }
+      } catch {
+        // ignore
+      }
+      // Fallback minimal product
+      if (mounted) {
+        setProduct({
+          slug,
+          title: "Ollie’s Paw Product",
+          brand: "Ollie’s Paw",
+          price: 199,
+          badge: null,
+          images: [{ url: "/images/dummy/placeholder.jpg", alt: "Product" }],
+          description: "Product description will be available soon.",
+          highlights: ["Premium quality", "Fast delivery"],
+        });
+      }
+    }
+    load();
+    return () => {
+      mounted = false;
+    };
+  }, [slug]);
+
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8">
+          <div className="text-foreground/70">Loading product...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
