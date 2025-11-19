@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
 const PROCESS_STEPS = [
@@ -10,6 +11,7 @@ const PROCESS_STEPS = [
     description: "Premium ingredients sourced from trusted suppliers across India.",
     percentage: 100,
     color: "#00ff95",
+    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=600&fit=crop&q=80",
   },
   {
     id: 2,
@@ -17,6 +19,7 @@ const PROCESS_STEPS = [
     description: "Science-backed formulas developed by pet nutrition experts.",
     percentage: 95,
     color: "#00e0ff",
+    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&h=600&fit=crop&q=80",
   },
   {
     id: 3,
@@ -24,6 +27,7 @@ const PROCESS_STEPS = [
     description: "Rigorous quality checks and safety testing at every stage.",
     percentage: 98,
     color: "#7c5cff",
+    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=600&fit=crop&q=80",
   },
   {
     id: 4,
@@ -31,6 +35,7 @@ const PROCESS_STEPS = [
     description: "Eco-friendly packaging that preserves freshness and quality.",
     percentage: 92,
     color: "#ffed4f",
+    image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=600&fit=crop&q=80",
   },
   {
     id: 5,
@@ -38,6 +43,7 @@ const PROCESS_STEPS = [
     description: "Fast, secure delivery to your doorstep across India.",
     percentage: 96,
     color: "#ff3670",
+    image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=600&h=600&fit=crop&q=80",
   },
 ];
 
@@ -225,12 +231,32 @@ export default function QualityProcess() {
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
             }`}
           >
-            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-6 sm:p-7 md:p-8">
+            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-6 sm:p-7 md:p-8 overflow-hidden">
               <GridOverlay opacity={0.1} />
+
+              {/* Process Image Background */}
+              <div className="absolute inset-0 opacity-10">
+                <Image
+                  src={PROCESS_STEPS[activeStep].image}
+                  alt={PROCESS_STEPS[activeStep].title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 600px) 100vw, 600px"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(135deg, ${PROCESS_STEPS[activeStep].color}40 0%, transparent 70%)`,
+                  }}
+                />
+              </div>
 
               <div
                 key={activeStep}
-                className="space-y-4 animate-fade-in"
+                className="space-y-4 animate-fade-in relative z-10"
               >
                 <div className="flex items-center gap-4">
                   <div
