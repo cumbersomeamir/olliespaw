@@ -2,29 +2,28 @@
 
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
-import Image from "next/image";
 
 const COMBOS = [
   {
     id: 1,
     products: [
-      { id: "1", title: "NourishMax Kibble – Chicken", price: 580, originalPrice: 725, discount: 20, image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=300&h=300&fit=crop&q=80" },
-      { id: "2", title: "Shine & Coat Supplement", price: 320, originalPrice: 400, discount: 20, image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=300&h=300&fit=crop&q=80" },
-      { id: "3", title: "Calm & Comfort Chews", price: 195, originalPrice: 240, discount: 18, image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=300&h=300&fit=crop&q=80" },
+      { id: "1", title: "NourishMax Kibble – Chicken", price: 580, originalPrice: 725, discount: 20 },
+      { id: "2", title: "Shine & Coat Supplement", price: 320, originalPrice: 400, discount: 20 },
+      { id: "3", title: "Calm & Comfort Chews", price: 195, originalPrice: 240, discount: 18 },
     ],
   },
   {
     id: 2,
     products: [
-      { id: "1", title: "NourishMax Kibble – Chicken", price: 580, originalPrice: 725, discount: 20, image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=300&h=300&fit=crop&q=80" },
-      { id: "4", title: "Daily Multivitamin Bites", price: 140, originalPrice: 175, discount: 20, image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=300&h=300&fit=crop&q=80" },
+      { id: "1", title: "NourishMax Kibble – Chicken", price: 580, originalPrice: 725, discount: 20 },
+      { id: "4", title: "Daily Multivitamin Bites", price: 140, originalPrice: 175, discount: 20 },
     ],
   },
   {
     id: 3,
     products: [
-      { id: "2", title: "Shine & Coat Supplement", price: 320, originalPrice: 400, discount: 20, image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=300&h=300&fit=crop&q=80" },
-      { id: "3", title: "Calm & Comfort Chews", price: 195, originalPrice: 240, discount: 18, image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=300&h=300&fit=crop&q=80" },
+      { id: "2", title: "Shine & Coat Supplement", price: 320, originalPrice: 400, discount: 20 },
+      { id: "3", title: "Calm & Comfort Chews", price: 195, originalPrice: 240, discount: 18 },
     ],
   },
 ];
@@ -91,21 +90,8 @@ export default function BuyTogether({ mainProduct }) {
                   />
                 </svg>
               </div>
-              <div className="h-24 w-24 bg-white relative overflow-hidden">
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                  sizes="96px"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                <div className="h-full w-full bg-accent/30 hidden items-center justify-center">
-                  <span className="text-[10px] text-foreground/40">Product</span>
-                </div>
+              <div className="h-24 w-24 bg-white">
+                <div className="h-full w-full bg-accent/30" />
               </div>
               {product.discount > 0 && (
                 <div className="absolute right-0 top-0 rounded bg-primary px-2 py-1 text-xs font-medium text-background">

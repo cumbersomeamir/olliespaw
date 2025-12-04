@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
 const FAVORITE_CATEGORIES = [
@@ -11,7 +10,6 @@ const FAVORITE_CATEGORIES = [
     name: "Dog Food",
     href: "/products?category=dog-food",
     image: "🦴",
-    photo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
     stat: "98% repeat buy",
     tag: "Low allergy",
   },
@@ -20,7 +18,6 @@ const FAVORITE_CATEGORIES = [
     name: "Cat Food",
     href: "/products?category=cat-food",
     image: "🐟",
-    photo: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop&q=80",
     stat: "95% repeat buy",
     tag: "Grain-free",
   },
@@ -29,7 +26,6 @@ const FAVORITE_CATEGORIES = [
     name: "Treats",
     href: "/products?category=treats",
     image: "🍖",
-    photo: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&q=80",
     stat: "92% repeat buy",
     tag: "Natural",
   },
@@ -38,7 +34,6 @@ const FAVORITE_CATEGORIES = [
     name: "Cat Litter & Accessories",
     href: "/products?category=cat-litter",
     image: "🧽",
-    photo: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop&q=80",
     stat: "89% repeat buy",
     tag: "Odor control",
   },
@@ -47,7 +42,6 @@ const FAVORITE_CATEGORIES = [
     name: "Toys",
     href: "/products?category=toys",
     image: "🎾",
-    photo: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&q=80",
     stat: "94% repeat buy",
     tag: "Durable",
   },
@@ -56,7 +50,6 @@ const FAVORITE_CATEGORIES = [
     name: "Flea & Tick",
     href: "/products?category=flea-tick",
     image: "🛡️",
-    photo: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop&q=80",
     stat: "96% repeat buy",
     tag: "Long-lasting",
   },
@@ -65,7 +58,6 @@ const FAVORITE_CATEGORIES = [
     name: "Health Care",
     href: "/products?category=health-care",
     image: "💊",
-    photo: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop&q=80",
     stat: "91% repeat buy",
     tag: "Vet approved",
   },
@@ -74,7 +66,6 @@ const FAVORITE_CATEGORIES = [
     name: "Grooming",
     href: "/products?category=grooming",
     image: "🧴",
-    photo: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop&q=80",
     stat: "93% repeat buy",
     tag: "Gentle",
   },
@@ -83,7 +74,6 @@ const FAVORITE_CATEGORIES = [
     name: "Bowls",
     href: "/products?category=bowls",
     image: "🥣",
-    photo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
     stat: "90% repeat buy",
     tag: "Stainless steel",
   },
@@ -92,7 +82,6 @@ const FAVORITE_CATEGORIES = [
     name: "Beds",
     href: "/products?category=beds",
     image: "🛏️",
-    photo: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop&q=80",
     stat: "97% repeat buy",
     tag: "Orthopedic",
   },
@@ -101,7 +90,6 @@ const FAVORITE_CATEGORIES = [
     name: "Leashes & Collars",
     href: "/products?category=leashes-collars",
     image: "🦮",
-    photo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
     stat: "88% repeat buy",
     tag: "Adjustable",
   },
@@ -110,7 +98,6 @@ const FAVORITE_CATEGORIES = [
     name: "Dog Training & Behavior",
     href: "/products?category=training",
     image: "📚",
-    photo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
     stat: "85% repeat buy",
     tag: "Expert guide",
   },
@@ -184,25 +171,10 @@ function DataTile({ category, index, isVisible }) {
       <div className="relative mb-4 aspect-square w-full max-w-[180px] overflow-hidden rounded-lg border border-[rgba(0,255,149,0.2)] bg-[#070f17] transition-all duration-300 group-hover:border-[#00ff95] group-hover:shadow-[0_0_20px_rgba(0,255,149,0.3)]">
         <GridOverlay opacity={0.05} />
 
-        {/* Category Image Background */}
-        <div className="absolute inset-0 opacity-50 group-hover:opacity-70 transition-opacity duration-300">
-          <Image
-            src={category.photo}
-            alt={category.name}
-            fill
-            className="object-cover"
-            sizes="(max-width: 180px) 100vw, 180px"
-            onError={(e) => {
-              e.target.style.display = 'none';
-            }}
-          />
-          <div className="absolute inset-0 bg-[#070f17]/60 group-hover:bg-[#070f17]/40 transition-colors duration-300" />
-        </div>
-
-        {/* Icon Overlay */}
-        <div className="relative flex h-full w-full items-center justify-center">
+        {/* Icon Container */}
+        <div className="flex h-full w-full items-center justify-center bg-[#070f17]/50 transition-all duration-300 group-hover:bg-[#070f17]/30">
           <span
-            className="text-6xl transition-all duration-300 group-hover:scale-110 z-10 drop-shadow-lg"
+            className="text-6xl transition-all duration-300 group-hover:scale-110"
             style={{
               filter: isHovered
                 ? "drop-shadow(0 0 15px rgba(0, 255, 149, 0.6)) brightness(1.2)"

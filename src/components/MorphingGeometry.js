@@ -99,5 +99,3 @@ export default function MorphingGeometry({ position = [0, 0, 0] }) {
 
 
 
-
-

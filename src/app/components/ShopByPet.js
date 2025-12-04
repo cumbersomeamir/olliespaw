@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
 const PET_CATEGORIES = [
@@ -12,7 +11,6 @@ const PET_CATEGORIES = [
     label: "ENTER DOG GRID",
     accent: "#00ff95",
     image: "🐕",
-    photo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=600&fit=crop&q=80",
   },
   {
     id: "cat",
@@ -20,7 +18,6 @@ const PET_CATEGORIES = [
     label: "ENTER CAT GRID",
     accent: "#00e0ff",
     image: "🐱",
-    photo: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=600&fit=crop&q=80",
   },
   {
     id: "fish",
@@ -28,7 +25,6 @@ const PET_CATEGORIES = [
     label: "ENTER FISH GRID",
     accent: "#7c5cff",
     image: "🐠",
-    photo: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=600&fit=crop&q=80",
   },
   {
     id: "small-pet",
@@ -36,7 +32,6 @@ const PET_CATEGORIES = [
     label: "ENTER SMALL PET GRID",
     accent: "#ffed4f",
     image: "🐰",
-    photo: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=600&fit=crop&q=80",
   },
   {
     id: "bird",
@@ -44,7 +39,6 @@ const PET_CATEGORIES = [
     label: "ENTER BIRD GRID",
     accent: "#00ff95",
     image: "🦜",
-    photo: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&h=600&fit=crop&q=80",
   },
   {
     id: "reptile",
@@ -52,7 +46,6 @@ const PET_CATEGORIES = [
     label: "ENTER REPTILE GRID",
     accent: "#ff3670",
     image: "🦎",
-    photo: "https://images.unsplash.com/photo-1520637836862-4d197d17c82a?w=600&h=600&fit=crop&q=80",
   },
 ];
 
@@ -175,30 +168,10 @@ function HologramTile({ pet, index, isVisible, mousePosition }) {
         />
       )}
 
-      {/* Pet Image Background */}
-      <div className="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
-        <Image
-          src={pet.photo}
-          alt={pet.name}
-          fill
-          className="object-cover"
-          sizes="(max-width: 600px) 100vw, 600px"
-          onError={(e) => {
-            e.target.style.display = 'none';
-          }}
-        />
+      {/* Pet Icon - Wireframe Style */}
+      <div className="absolute inset-0 flex items-center justify-center">
         <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(135deg, ${pet.accent}20 0%, transparent 70%)`,
-          }}
-        />
-      </div>
-
-      {/* Pet Icon - Wireframe Style (Overlay) */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          className="text-8xl transition-all duration-500 group-hover:scale-110 drop-shadow-lg"
+          className="text-8xl transition-all duration-500 group-hover:scale-110"
           style={{
             filter: isHovered
               ? `drop-shadow(0 0 20px ${pet.accent}) brightness(1.2)`

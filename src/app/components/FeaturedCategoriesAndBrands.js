@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
 const FEATURED_CATEGORIES = [
@@ -12,7 +11,6 @@ const FEATURED_CATEGORIES = [
     discount: "up to 50% off",
     href: "/products?category=travel-safety",
     color: "#00ff95",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
   },
   {
     id: "healthcare",
@@ -20,7 +18,6 @@ const FEATURED_CATEGORIES = [
     discount: "up to 50% off",
     href: "/products?category=healthcare",
     color: "#00e0ff",
-    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop&q=80",
   },
   {
     id: "gifting",
@@ -28,7 +25,6 @@ const FEATURED_CATEGORIES = [
     discount: "up to 60% off",
     href: "/products?category=gifting",
     color: "#7c5cff",
-    image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop&q=80",
   },
   {
     id: "cleaning-essentials",
@@ -36,7 +32,6 @@ const FEATURED_CATEGORIES = [
     discount: "up to 70% off",
     href: "/products?category=cleaning-essentials",
     color: "#ffed4f",
-    image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop&q=80",
   },
   {
     id: "tick-flea",
@@ -44,7 +39,6 @@ const FEATURED_CATEGORIES = [
     discount: "up to 70% off",
     href: "/products?category=tick-flea",
     color: "#ff3670",
-    image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&q=80",
   },
   {
     id: "clothing",
@@ -52,7 +46,6 @@ const FEATURED_CATEGORIES = [
     discount: "up to 70% off",
     href: "/products?category=clothing",
     color: "#00ff95",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
   },
 ];
 
@@ -63,7 +56,6 @@ const TOP_BRANDS = [
     discount: "up to 20% off",
     href: "/products?brand=royal-canin",
     color: "#00ff95",
-    logo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "lilys-kitchen",
@@ -71,7 +63,6 @@ const TOP_BRANDS = [
     discount: "up to 30% off",
     href: "/products?brand=lilys-kitchen",
     color: "#00e0ff",
-    logo: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "orijen",
@@ -79,7 +70,6 @@ const TOP_BRANDS = [
     discount: "up to 10% off",
     href: "/products?brand=orijen",
     color: "#7c5cff",
-    logo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "acana",
@@ -87,7 +77,6 @@ const TOP_BRANDS = [
     discount: "up to 15% off",
     href: "/products?brand=acana",
     color: "#ffed4f",
-    logo: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "applaws",
@@ -95,7 +84,6 @@ const TOP_BRANDS = [
     discount: "up to 10% off",
     href: "/products?brand=applaws",
     color: "#ff3670",
-    logo: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "thunder-paws",
@@ -103,7 +91,6 @@ const TOP_BRANDS = [
     discount: "up to 70% off",
     href: "/products?brand=thunder-paws",
     color: "#00ff95",
-    logo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "bud-billy",
@@ -111,7 +98,6 @@ const TOP_BRANDS = [
     discount: "up to 80% off",
     href: "/products?brand=bud-billy",
     color: "#00e0ff",
-    logo: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "addiction",
@@ -119,7 +105,6 @@ const TOP_BRANDS = [
     discount: "up to 50% off",
     href: "/products?brand=addiction",
     color: "#7c5cff",
-    logo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "hills-science",
@@ -127,7 +112,6 @@ const TOP_BRANDS = [
     discount: "up to 10% off",
     href: "/products?brand=hills-science",
     color: "#ffed4f",
-    logo: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "arden-grange",
@@ -135,7 +119,6 @@ const TOP_BRANDS = [
     discount: "up to 30% off",
     href: "/products?brand=arden-grange",
     color: "#ff3670",
-    logo: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "open-farm",
@@ -143,7 +126,6 @@ const TOP_BRANDS = [
     discount: "up to 40% off",
     href: "/products?brand=open-farm",
     color: "#00ff95",
-    logo: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=200&h=200&fit=crop&q=80",
   },
   {
     id: "trixie",
@@ -151,7 +133,6 @@ const TOP_BRANDS = [
     discount: "up to 80% off",
     href: "/products?brand=trixie",
     color: "#00e0ff",
-    logo: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&h=200&fit=crop&q=80",
   },
 ];
 
@@ -233,25 +214,20 @@ export default function FeaturedCategoriesAndBrands() {
                   </div>
                 </div>
 
-                {/* Category Image with Grid */}
-                <div className="mb-3 flex flex-1 items-center justify-center rounded-lg border border-[rgba(0,255,149,0.2)] bg-[#050b11] transition-all duration-300 group-hover:border-[#00ff95] overflow-hidden relative">
-                  <GridOverlay opacity={0.1} />
-                  <Image
-                    src={category.image}
-                    alt={category.name}
-                    fill
-                    className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300"
-                    sizes="(max-width: 200px) 100vw, 200px"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-0"
-                    style={{
-                      backgroundColor: `${category.color}10`,
-                    }}
-                  />
+                {/* Product Image Placeholder with Grid */}
+                <div className="mb-3 flex flex-1 items-center justify-center rounded-lg border border-[rgba(0,255,149,0.2)] bg-[#050b11] transition-all duration-300 group-hover:border-[#00ff95]">
+                  <div className="relative h-full w-full">
+                    <GridOverlay opacity={0.1} />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div
+                        className="h-16 w-16 rounded-lg border-2 transition-all duration-300 group-hover:scale-110"
+                        style={{
+                          borderColor: category.color,
+                          backgroundColor: `${category.color}10`,
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 {/* Category Name */}
@@ -324,26 +300,25 @@ export default function FeaturedCategoriesAndBrands() {
                   })}
                 </div>
 
-                {/* Brand Logo */}
+                {/* Brand Logo Placeholder */}
                 <div className="relative mb-8 flex h-20 w-20 items-center justify-center">
                   <div
-                    className="h-full w-full rounded-full border-2 transition-all duration-300 group-hover:scale-110 overflow-hidden"
+                    className="h-full w-full rounded-full border-2 transition-all duration-300 group-hover:scale-110"
                     style={{
                       borderColor: brand.color,
                       backgroundColor: `${brand.color}10`,
                       boxShadow: `0 0 20px ${brand.color}30`,
                     }}
                   >
-                    <Image
-                      src={brand.logo}
-                      alt={brand.name}
-                      fill
-                      className="object-cover rounded-full"
-                      sizes="80px"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                      }}
-                    />
+                    <div className="flex h-full w-full items-center justify-center">
+                      <div
+                        className="h-8 w-8 rounded-full"
+                        style={{
+                          backgroundColor: brand.color,
+                          opacity: 0.3,
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
 

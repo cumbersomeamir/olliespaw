@@ -2,7 +2,6 @@
 
 import { useCart } from "@/contexts/CartContext";
 import Link from "next/link";
-import Image from "next/image";
 
 const SIMILAR_PRODUCTS = [
   {
@@ -10,35 +9,30 @@ const SIMILAR_PRODUCTS = [
     title: "Whimzees Rice Bone Dental Dog Treat For Large Breeds 540G",
     price: "₹ 59.85",
     slug: "whimzees-rice-bone",
-    image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&q=80",
   },
   {
     id: "6",
     title: "Royal Canin Golden Retriever Puppy Dry Food 12kg",
     price: "₹ 468.00",
     slug: "royal-canin-puppy",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
   },
   {
     id: "7",
     title: "ZIWI Peak Deer Shank Bone Full Dog Chew 16-24CM",
     price: "₹ 69.48",
     slug: "ziwi-peak-deer",
-    image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&q=80",
   },
   {
     id: "8",
     title: "Royal Canin Labrador Retriever Adult Dry Dog Food",
     price: "₹ 139.00",
     slug: "royal-canin-labrador",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
   },
   {
     id: "9",
     title: "Synergy Labs Veterinary Formula Clinical Skin Care & Itch Relief 30 Tablets",
     price: "₹ 107.00",
     slug: "synergy-labs-skin",
-    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop&q=80",
   },
 ];
 
@@ -57,21 +51,8 @@ export default function SimilarProducts() {
             className="min-w-[200px] flex-shrink-0 border border-foreground/10 bg-background"
           >
             <Link href={`/products/${product.slug}`}>
-              <div className="aspect-square w-full bg-white relative overflow-hidden">
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 200px) 100vw, 200px"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                <div className="h-full w-full bg-accent/30 hidden items-center justify-center">
-                  <span className="text-xs text-foreground/40">Product</span>
-                </div>
+              <div className="aspect-square w-full bg-white">
+                <div className="h-full w-full bg-accent/30" />
               </div>
             </Link>
             <div className="p-4">

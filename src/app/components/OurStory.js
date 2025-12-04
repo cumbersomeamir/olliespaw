@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import CodeRain from "@/components/matrix/CodeRain";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
@@ -178,7 +177,7 @@ export default function OurStory() {
             <div className="relative h-[400px] w-full max-w-md">
               {/* 3D Rotating Card */}
               <div
-                className="absolute inset-0 rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-8 transition-transform duration-500 hover:rotate-y-12 overflow-hidden"
+                className="absolute inset-0 rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-8 transition-transform duration-500 hover:rotate-y-12"
                 style={{
                   transformStyle: "preserve-3d",
                   perspective: "1000px",
@@ -186,23 +185,8 @@ export default function OurStory() {
               >
                 <GridOverlay opacity={0.1} />
                 
-                {/* Pet Image Background */}
-                <div className="absolute inset-0 opacity-30">
-                  <Image
-                    src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=800&fit=crop&q=80"
-                    alt="Pet"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 400px) 100vw, 400px"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#070f17] via-transparent to-transparent" />
-                </div>
-                
                 {/* Orbital Particles */}
-                <div className="absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
+                <div className="absolute inset-0 overflow-hidden rounded-xl">
                   {Array.from({ length: 8 }).map((_, i) => {
                     const angle = (i * 360) / 8;
                     const radius = 150;

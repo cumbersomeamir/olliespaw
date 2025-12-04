@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import CodeRain from "@/components/matrix/CodeRain";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
@@ -29,22 +28,19 @@ export default function HomeStoreOpening() {
       label: "DOG", 
       subtitle: "ENTER DOG GRID",
       accent: "#00ff95",
-      delay: 0,
-      image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=1200&h=1600&fit=crop&q=80",
+      delay: 0 
     },
     { 
       label: "CAT", 
       subtitle: "ENTER CAT GRID",
       accent: "#00e0ff",
-      delay: 100,
-      image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=1200&h=1600&fit=crop&q=80",
+      delay: 100 
     },
     { 
       label: "ALL", 
       subtitle: "VIEW ALL SIGNALS",
       accent: "#7c5cff",
-      delay: 200,
-      image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=1200&h=1600&fit=crop&q=80",
+      delay: 200 
     },
   ];
 
@@ -86,26 +82,6 @@ function Panel({ panel, isVisible, mousePosition, index }) {
       {/* Background Effects */}
       <CodeRain intensity={8} speed={60} />
       <GridOverlay opacity={0.08} pulse={true} />
-      
-      {/* Pet Image Background */}
-      <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
-        <Image
-          src={panel.image}
-          alt={panel.label}
-          fill
-          className="object-cover"
-          sizes="(max-width: 1200px) 100vw, 1200px"
-          onError={(e) => {
-            e.target.style.display = 'none';
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(135deg, ${panel.accent}40 0%, transparent 70%)`,
-          }}
-        />
-      </div>
       
       {/* Neon Border Frame */}
       <div

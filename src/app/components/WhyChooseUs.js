@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
 const FEATURES = [
@@ -11,7 +10,6 @@ const FEATURES = [
     description: "Proudly crafted in India with locally sourced premium ingredients.",
     icon: "🇮🇳",
     color: "#00ff95",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 2,
@@ -19,7 +17,6 @@ const FEATURES = [
     description: "Every formula is developed with veterinary expertise and research.",
     icon: "🔬",
     color: "#00e0ff",
-    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 3,
@@ -27,7 +24,6 @@ const FEATURES = [
     description: "No artificial preservatives, colors, or harmful additives.",
     icon: "🌿",
     color: "#7c5cff",
-    image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 4,
@@ -35,7 +31,6 @@ const FEATURES = [
     description: "Recommended by veterinarians and trusted by pet parents.",
     icon: "👨‍⚕️",
     color: "#ffed4f",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 5,
@@ -43,7 +38,6 @@ const FEATURES = [
     description: "PAN India shipping with secure and timely delivery.",
     icon: "🚚",
     color: "#ff3670",
-    image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 6,
@@ -51,7 +45,6 @@ const FEATURES = [
     description: "7-day hassle-free return policy for your peace of mind.",
     icon: "↩️",
     color: "#00ff95",
-    image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop&q=80",
   },
 ];
 
@@ -204,26 +197,6 @@ export default function WhyChooseUs() {
               }}
             >
               <GridOverlay opacity={0.05} />
-
-              {/* Feature Image Background */}
-              <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300 overflow-hidden">
-                <Image
-                  src={feature.image}
-                  alt={feature.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 400px) 100vw, 400px"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(135deg, ${feature.color}40 0%, transparent 70%)`,
-                  }}
-                />
-              </div>
 
               {/* Radar Sweep on Hover */}
               {hoveredIndex === index && (

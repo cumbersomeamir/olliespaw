@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
 const SUSTAINABILITY_POINTS = [
@@ -12,7 +11,6 @@ const SUSTAINABILITY_POINTS = [
     percentage: 100,
     color: "#00ff95",
     icon: "♻️",
-    image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 2,
@@ -21,7 +19,6 @@ const SUSTAINABILITY_POINTS = [
     percentage: 85,
     color: "#00e0ff",
     icon: "🌾",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 3,
@@ -30,7 +27,6 @@ const SUSTAINABILITY_POINTS = [
     percentage: 90,
     color: "#7c5cff",
     icon: "🌱",
-    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 4,
@@ -39,7 +35,6 @@ const SUSTAINABILITY_POINTS = [
     percentage: 95,
     color: "#ffed4f",
     icon: "♻️",
-    image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop&q=80",
   },
 ];
 
@@ -216,29 +211,14 @@ export default function Sustainability() {
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
             }`}
           >
-            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-8 overflow-hidden">
+            <div className="relative rounded-xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-8">
               <GridOverlay opacity={0.1} />
 
-              {/* Sustainability Image Background */}
-              <div className="absolute inset-0 opacity-10">
-                <Image
-                  src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&h=800&fit=crop&q=80"
-                  alt="Sustainability"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 800px) 100vw, 800px"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#070f17] via-transparent to-transparent" />
-              </div>
-
-              <h3 className="mb-6 font-mono text-sm uppercase tracking-wider text-[#00ff95] relative z-10">
+              <h3 className="mb-6 font-mono text-sm uppercase tracking-wider text-[#00ff95]">
                 OUR COMMITMENT
               </h3>
 
-              <div className="space-y-4 text-[#a7b2c7] leading-relaxed relative z-10">
+              <div className="space-y-4 text-[#a7b2c7] leading-relaxed">
                 <p>
                   <WordByWordReveal
                     text="At Ollie's Paw, we believe in responsible pet care that extends beyond our products. We're committed to sustainable practices that protect our planet for future generations."
@@ -276,33 +256,13 @@ export default function Sustainability() {
               >
                 <GridOverlay opacity={0.05} />
 
-                {/* Sustainability Point Image Background */}
-                <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
-                  <Image
-                    src={point.image}
-                    alt={point.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 400px) 100vw, 400px"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(135deg, ${point.color}30 0%, transparent 70%)`,
-                    }}
-                  />
-                </div>
-
                 {/* Icon */}
-                <div className="mb-4 flex justify-center text-4xl relative z-10">
+                <div className="mb-4 flex justify-center text-4xl">
                   {point.icon}
                 </div>
 
                 {/* Circular Progress */}
-                <div className="mb-4 flex justify-center relative z-10">
+                <div className="mb-4 flex justify-center">
                   <CircularProgress
                     percentage={point.percentage}
                     color={point.color}
@@ -312,14 +272,14 @@ export default function Sustainability() {
 
                 {/* Title */}
                 <h4
-                  className="mb-2 text-center font-mono text-xs font-bold uppercase tracking-wider transition-colors duration-300 group-hover:text-[#00ff95] relative z-10"
+                  className="mb-2 text-center font-mono text-xs font-bold uppercase tracking-wider transition-colors duration-300 group-hover:text-[#00ff95]"
                   style={{ color: point.color }}
                 >
                   {point.title}
                 </h4>
 
                 {/* Description */}
-                <p className="text-center text-xs leading-relaxed text-[#6c7383] relative z-10">
+                <p className="text-center text-xs leading-relaxed text-[#6c7383]">
                   {point.description}
                 </p>
               </div>
