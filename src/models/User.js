@@ -1,16 +1,30 @@
-import connectDB from '@/lib/mongodb';
+import mongoose, { Schema } from "mongoose";
+import { dbConnect } from "@/lib/mongodb";
 
-const DB_NAME = 'olliespaw';
-const COLLECTION_NAME = 'login';
+const UserSchema = new Schema(
+  {
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    countryCode: { type: String, default: "+91" },
+    mobileNumber: { type: String, required: true },
+    email: { type: String, required: true, lowercase: true, trim: true },
+    password: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+
+// Create indexes for efficient queries
+UserSchema.index({ email: 1 });
+UserSchema.index({ mobileNumber: 1 });
+
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
 export async function createUser(userData) {
   try {
-    const client = await connectDB();
-    const db = client.db(DB_NAME);
-    const collection = db.collection(COLLECTION_NAME);
-
+    await dbConnect();
+    
     // Check if user already exists by email or mobile number
-    const existingUser = await collection.findOne({
+    const existingUser = await User.findOne({
       $or: [
         { email: userData.email },
         { mobileNumber: userData.mobileNumber }
@@ -21,15 +35,9 @@ export async function createUser(userData) {
       throw new Error('User already exists with this email or mobile number');
     }
 
-    // Add createdAt timestamp
-    const newUser = {
-      ...userData,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-
-    const result = await collection.insertOne(newUser);
-    return { success: true, userId: result.insertedId };
+    const newUser = new User(userData);
+    const savedUser = await newUser.save();
+    return { success: true, userId: savedUser._id };
   } catch (error) {
     throw error;
   }
@@ -37,11 +45,8 @@ export async function createUser(userData) {
 
 export async function findUserByEmail(email) {
   try {
-    const client = await connectDB();
-    const db = client.db(DB_NAME);
-    const collection = db.collection(COLLECTION_NAME);
-    
-    return await collection.findOne({ email });
+    await dbConnect();
+    return await User.findOne({ email: email.toLowerCase().trim() }).lean();
   } catch (error) {
     throw error;
   }
@@ -49,11 +54,8 @@ export async function findUserByEmail(email) {
 
 export async function findUserByMobile(mobileNumber) {
   try {
-    const client = await connectDB();
-    const db = client.db(DB_NAME);
-    const collection = db.collection(COLLECTION_NAME);
-    
-    return await collection.findOne({ mobileNumber });
+    await dbConnect();
+    return await User.findOne({ mobileNumber }).lean();
   } catch (error) {
     throw error;
   }
@@ -61,16 +63,15 @@ export async function findUserByMobile(mobileNumber) {
 
 export async function findUserByEmailOrMobile(email, mobileNumber) {
   try {
-    const client = await connectDB();
-    const db = client.db(DB_NAME);
-    const collection = db.collection(COLLECTION_NAME);
-    
-    return await collection.findOne({
-      $or: [
-        { email },
-        { mobileNumber }
-      ]
-    });
+    await dbConnect();
+    const orConditions = [];
+    if (email) {
+      orConditions.push({ email: email.toLowerCase().trim() });
+    }
+    if (mobileNumber) {
+      orConditions.push({ mobileNumber });
+    }
+    return await User.findOne({ $or: orConditions }).lean();
   } catch (error) {
     throw error;
   }
