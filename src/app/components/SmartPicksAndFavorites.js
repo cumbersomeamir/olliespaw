@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
 const SMART_PICKS = [
-  { id: 1, price: 10, label: "UNDER ₹ 10", color: "#00ff95" },
-  { id: 2, price: 20, label: "UNDER ₹ 20", color: "#00e0ff" },
-  { id: 3, price: 30, label: "UNDER ₹ 30", color: "#7c5cff" },
-  { id: 4, price: 40, label: "UNDER ₹ 40", color: "#ffed4f" },
+  { id: 1, price: 49, label: "UNDER ₹ 49", color: "#00ff95" },
+  { id: 2, price: 99, label: "UNDER ₹ 99", color: "#00e0ff" },
+  { id: 3, price: 199, label: "UNDER ₹ 199", color: "#7c5cff" },
+  { id: 4, price: 499, label: "UNDER ₹ 499", color: "#ffed4f" },
 ];
 
 // SVG Icon Components - Matrix wireframe style
@@ -125,48 +126,27 @@ const NOVEMBER_FAVORITES = [
     name: "Dry Food",
     discount: "Upto 50% off",
     Icon: BoneIcon,
+    image: "https://openfarmpet.com/cdn/shop/files/OFP-Dog-Dry-Food-Collection-All-Bowl-155x110.png?v=1741803381&width=1200",
     href: "/products?category=dry-food",
     color: "#00ff95",
   },
   {
     id: "cat-litter",
-    name: "Cat Litter",
+    name: "Litter",
     discount: "Upto 30% off",
     Icon: CatLitterIcon,
+    image: "https://www.healthy-pet.com/cdn/shop/articles/cat_paw_litter_box_ksetani.jpg?v=1684366611",
     href: "/products?category=cat-litter",
     color: "#00e0ff",
   },
   {
-    id: "treats",
-    name: "Treats",
-    discount: "Upto 40% off",
-    Icon: TreatsIcon,
-    href: "/products?category=treats",
-    color: "#7c5cff",
-  },
-  {
-    id: "beds",
-    name: "Beds",
-    price: "start from ₹ 25",
-    Icon: BedIcon,
-    href: "/products?category=beds",
-    color: "#ffed4f",
-  },
-  {
     id: "toys",
     name: "Toys",
-    price: "under ₹ 40",
-    Icon: ToysIcon,
+    discount: "Upto 40% off",
+    Icon: TreatsIcon,
+    image: "https://image.petmd.com/files/inline-images/dog%20with%20frisco%20toy%20in%20mouth.jpg?VersionId=DVVTn4QtoUid9ljq_3gTdXNaamN7qiBs",
     href: "/products?category=toys",
-    color: "#ff3670",
-  },
-  {
-    id: "collar-harness",
-    name: "Collar & Harness",
-    price: "under ₹ 39",
-    Icon: CollarHarnessIcon,
-    href: "/products?category=collar-harness",
-    color: "#00ff95",
+    color: "#7c5cff",
   },
 ];
 
@@ -209,9 +189,7 @@ export default function SmartPicksAndFavorites() {
             <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
               SMART PICKS
             </h2>
-            <p className="font-mono text-sm text-[#6c7383]">
-              // PRICE FILTER MATRIX
-            </p>
+
           </div>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             {SMART_PICKS.map((pick, index) => (
@@ -272,9 +250,7 @@ export default function SmartPicksAndFavorites() {
             <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
               NOVEMBER FAVOURITES
             </h2>
-            <p className="font-mono text-sm text-[#6c7383]">
-              // SEASONAL OFFERS DATABASE
-            </p>
+
           </div>
           <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {NOVEMBER_FAVORITES.map((favorite, index) => {
@@ -283,7 +259,7 @@ export default function SmartPicksAndFavorites() {
                 <Link
                   key={favorite.id}
                   href={favorite.href}
-                  className="group relative overflow-hidden rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-8 transition-all duration-500 hover:border-[#00ff95] hover:shadow-[0_0_40px_rgba(0,255,149,0.4)]"
+                  className="group relative overflow-hidden rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-4 sm:p-6 md:p-8 transition-all duration-500 hover:border-[#00ff95] hover:shadow-[0_0_40px_rgba(0,255,149,0.4)]"
                   style={{
                     opacity: isVisible ? 1 : 0,
                     transform: isVisible
@@ -305,16 +281,16 @@ export default function SmartPicksAndFavorites() {
                     }}
                   />
 
-                  {/* Product Icon */}
-                  <div className="relative mb-6 flex h-48 items-center justify-center">
-                    <div
-                      className="transition-all duration-300 group-hover:scale-110"
-                      style={{
-                        color: favorite.color,
-                        filter: `drop-shadow(0 0 20px ${favorite.color}60)`,
-                      }}
-                    >
-                      <IconComponent />
+                  {/* Product Image */}
+                  <div className="relative mb-4 sm:mb-6 flex h-32 sm:h-40 md:h-48 items-center justify-center overflow-hidden rounded-lg">
+                    <div className="relative w-full h-full transition-all duration-300 group-hover:scale-110">
+                      <Image
+                        src={favorite.image}
+                        alt={favorite.name}
+                        fill
+                        className="object-cover rounded-lg"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
                     </div>
                   </div>
 

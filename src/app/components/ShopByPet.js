@@ -8,44 +8,44 @@ const PET_CATEGORIES = [
   {
     id: "dog",
     name: "Dog",
-    label: "ENTER DOG GRID",
+    label: "DOG",
     accent: "#00ff95",
     image: "🐕",
   },
   {
     id: "cat",
     name: "Cat",
-    label: "ENTER CAT GRID",
+    label: "CAT",
     accent: "#00e0ff",
     image: "🐱",
   },
   {
     id: "fish",
     name: "Fish",
-    label: "ENTER FISH GRID",
+    label: "FISH",
     accent: "#7c5cff",
     image: "🐠",
   },
   {
     id: "small-pet",
     name: "Small Pet",
-    label: "ENTER SMALL PET GRID",
+    label: "SMALL PET",
     accent: "#ffed4f",
     image: "🐰",
   },
   {
     id: "bird",
     name: "Bird",
-    label: "ENTER BIRD GRID",
+    label: "BIRD",
     accent: "#00ff95",
     image: "🦜",
   },
   {
-    id: "reptile",
-    name: "Reptile",
-    label: "ENTER REPTILE GRID",
+    id: "horse",
+    name: "Horse",
+    label: "HORSE",
     accent: "#ff3670",
-    image: "🦎",
+    image: "🐴",
   },
 ];
 
@@ -85,9 +85,6 @@ export default function ShopByPet() {
           <h2 className="mb-2 text-2xl font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
             SHOP BY PET
           </h2>
-          <p className="font-mono text-sm text-[#6c7383]">
-            // HOLOGRAM TILE INTERFACE v2.0
-          </p>
         </div>
 
         {/* Pet Category Grid */}

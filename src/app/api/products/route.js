@@ -21,8 +21,7 @@ const FALLBACK_PRODUCTS = [
     deliveryTime: "2-3 days",
     accent: "#00ff95",
     images: [
-      { url: "/images/dummy/supplement-1.jpg", alt: "Pet + Iron" },
-      { url: "/images/dummy/supplement-2.jpg", alt: "Pet + Iron bottle" },
+      { url: "/images/PET IRON.jpeg", alt: "Pet + Iron" },
     ],
     description: "Essential iron supplement to boost immunity and support overall health in dogs.",
     highlights: ["Iron enriched", "Immunity booster", "Vet recommended"],
@@ -48,8 +47,7 @@ const FALLBACK_PRODUCTS = [
     deliveryTime: "2-3 days",
     accent: "#00ff95",
     images: [
-      { url: "/images/dummy/supplement-1.jpg", alt: "Pet + Calcium" },
-      { url: "/images/dummy/supplement-2.jpg", alt: "Pet + Calcium bottle" },
+      { url: "/images/PET CALCIUM.jpeg", alt: "Pet + Calcium" },
     ],
     description: "Calcium supplement designed to support joint health and bone strength in dogs.",
     highlights: ["Calcium enriched", "Joint support", "Bone strength"],
@@ -75,8 +73,7 @@ const FALLBACK_PRODUCTS = [
     deliveryTime: "2-3 days",
     accent: "#00ff95",
     images: [
-      { url: "/images/dummy/supplement-1.jpg", alt: "Vita Pet" },
-      { url: "/images/dummy/supplement-2.jpg", alt: "Vita Pet bottle" },
+      { url: "/images/VITA PET.jpeg", alt: "Vita Pet" },
     ],
     description: "Comprehensive multivitamin supplement to promote healthy skin and shiny coat in dogs.",
     highlights: ["Multivitamin blend", "Skin health", "Coat shine"],
@@ -102,8 +99,7 @@ const FALLBACK_PRODUCTS = [
     deliveryTime: "2-3 days",
     accent: "#00ff95",
     images: [
-      { url: "/images/dummy/supplement-1.jpg", alt: "Pet + Fertile" },
-      { url: "/images/dummy/supplement-2.jpg", alt: "Pet + Fertile bottle" },
+      { url: "/images/PET FERTILE.jpeg", alt: "Pet + Fertile" },
     ],
     description: "Specialized supplement to boost immunity and support reproductive health in dogs.",
     highlights: ["Immunity booster", "Reproductive health", "Vet formulated"],

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import GridOverlay from "@/components/matrix/GridOverlay";
 
 const FEATURED_CATEGORIES = [
@@ -11,6 +12,7 @@ const FEATURED_CATEGORIES = [
     discount: "up to 50% off",
     href: "/products?category=travel-safety",
     color: "#00ff95",
+    image: "https://whitehavenvet.com/wp-content/uploads/2023/01/how-to-travel-safely-with-your-pets-national-pet-travel-safety-day-strip1.jpg",
   },
   {
     id: "healthcare",
@@ -18,6 +20,7 @@ const FEATURED_CATEGORIES = [
     discount: "up to 50% off",
     href: "/products?category=healthcare",
     color: "#00e0ff",
+    image: "https://d2zp5xs5cp8zlg.cloudfront.net/image-41937-800.jpg",
   },
   {
     id: "gifting",
@@ -25,6 +28,7 @@ const FEATURED_CATEGORIES = [
     discount: "up to 60% off",
     href: "/products?category=gifting",
     color: "#7c5cff",
+    image: "https://people.com/thmb/c5QoDPX3JD4B489mMkhyKlikA2s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(794x529:796x531)/dog-in-gift-box-121622-72649698406d4b3fb7b6792dc6fb25a3.jpg",
   },
   {
     id: "cleaning-essentials",
@@ -32,13 +36,7 @@ const FEATURED_CATEGORIES = [
     discount: "up to 70% off",
     href: "/products?category=cleaning-essentials",
     color: "#ffed4f",
-  },
-  {
-    id: "tick-flea",
-    name: "Tick & Flea",
-    discount: "up to 70% off",
-    href: "/products?category=tick-flea",
-    color: "#ff3670",
+    image: "https://thegroomer.ae/wp-content/uploads/2025/09/beautiful-pet-portrait-dog-scaled.jpg",
   },
   {
     id: "clothing",
@@ -46,93 +44,7 @@ const FEATURED_CATEGORIES = [
     discount: "up to 70% off",
     href: "/products?category=clothing",
     color: "#00ff95",
-  },
-];
-
-const TOP_BRANDS = [
-  {
-    id: "royal-canin",
-    name: "Royal Canin",
-    discount: "up to 20% off",
-    href: "/products?brand=royal-canin",
-    color: "#00ff95",
-  },
-  {
-    id: "lilys-kitchen",
-    name: "Lily's Kitchen",
-    discount: "up to 30% off",
-    href: "/products?brand=lilys-kitchen",
-    color: "#00e0ff",
-  },
-  {
-    id: "orijen",
-    name: "Orijen",
-    discount: "up to 10% off",
-    href: "/products?brand=orijen",
-    color: "#7c5cff",
-  },
-  {
-    id: "acana",
-    name: "Acana",
-    discount: "up to 15% off",
-    href: "/products?brand=acana",
-    color: "#ffed4f",
-  },
-  {
-    id: "applaws",
-    name: "Applaws",
-    discount: "up to 10% off",
-    href: "/products?brand=applaws",
-    color: "#ff3670",
-  },
-  {
-    id: "thunder-paws",
-    name: "Thunder Paws",
-    discount: "up to 70% off",
-    href: "/products?brand=thunder-paws",
-    color: "#00ff95",
-  },
-  {
-    id: "bud-billy",
-    name: "Bud & Billy",
-    discount: "up to 80% off",
-    href: "/products?brand=bud-billy",
-    color: "#00e0ff",
-  },
-  {
-    id: "addiction",
-    name: "Addiction",
-    discount: "up to 50% off",
-    href: "/products?brand=addiction",
-    color: "#7c5cff",
-  },
-  {
-    id: "hills-science",
-    name: "Hill's Science Plan",
-    discount: "up to 10% off",
-    href: "/products?brand=hills-science",
-    color: "#ffed4f",
-  },
-  {
-    id: "arden-grange",
-    name: "Arden Grange",
-    discount: "up to 30% off",
-    href: "/products?brand=arden-grange",
-    color: "#ff3670",
-  },
-  {
-    id: "open-farm",
-    name: "Open Farm",
-    discount: "up to 40% off",
-    href: "/products?brand=open-farm",
-    color: "#00ff95",
-  },
-  {
-    id: "trixie",
-    name: "Trixie",
-    discount: "up to 80% off",
-    href: "/products?brand=trixie",
-    color: "#00e0ff",
+    image: "https://xcdn.next.co.uk/Common/Items/Default/Default/ItemImages/3_4Ratio/SearchINT/Lge/W23945.jpg?im=Resize,width=450",
   },
 ];
 
@@ -175,16 +87,13 @@ export default function FeaturedCategoriesAndBrands() {
             <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
               FEATURED CATEGORIES
             </h2>
-            <p className="font-mono text-sm text-[#6c7383]">
-              // CATEGORY DISCOUNT MATRIX
-            </p>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
             {FEATURED_CATEGORIES.map((category, index) => (
               <Link
                 key={category.id}
                 href={category.href}
-                className="group relative flex h-64 flex-col overflow-hidden rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-4 transition-all duration-500 hover:border-[#00ff95] hover:shadow-[0_0_30px_rgba(0,255,149,0.3)]"
+                className="group relative flex w-full sm:w-[280px] md:w-[320px] lg:w-[360px] h-80 sm:h-96 md:h-[420px] flex-col overflow-hidden rounded-xl border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-4 sm:p-5 md:p-6 transition-all duration-500 hover:border-[#00ff95] hover:shadow-[0_0_30px_rgba(0,255,149,0.3)]"
                 style={{
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible
@@ -196,9 +105,9 @@ export default function FeaturedCategoriesAndBrands() {
                 <GridOverlay opacity={0.05} />
 
                 {/* Discount Badge - Top Right */}
-                <div className="absolute right-2 top-2 z-10">
+                <div className="absolute right-3 top-3 sm:right-4 sm:top-4 z-10">
                   <div
-                    className="flex h-14 w-14 items-center justify-center rounded-full border-2 transition-all duration-300 group-hover:scale-110"
+                    className="flex h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 items-center justify-center rounded-full border-2 transition-all duration-300 group-hover:scale-110"
                     style={{
                       backgroundColor: `${category.color}20`,
                       borderColor: category.color,
@@ -206,7 +115,7 @@ export default function FeaturedCategoriesAndBrands() {
                     }}
                   >
                     <p
-                      className="text-center font-mono text-[9px] font-bold leading-tight uppercase tracking-tighter"
+                      className="text-center font-mono text-[10px] sm:text-xs font-bold leading-tight uppercase tracking-tighter px-1"
                       style={{ color: category.color }}
                     >
                       {category.discount}
@@ -214,8 +123,20 @@ export default function FeaturedCategoriesAndBrands() {
                   </div>
                 </div>
 
-                {/* Product Image Placeholder with Grid */}
-                <div className="mb-3 flex flex-1 items-center justify-center rounded-lg border border-[rgba(0,255,149,0.2)] bg-[#050b11] transition-all duration-300 group-hover:border-[#00ff95]">
+                {/* Product Image */}
+                <div className="relative mb-3 flex flex-1 items-center justify-center overflow-hidden rounded-lg border border-[rgba(0,255,149,0.2)] bg-[#050b11] transition-all duration-300 group-hover:border-[#00ff95]">
+                  {category.image ? (
+                    <div className="relative h-full w-full">
+                      <Image
+                        src={category.image}
+                        alt={category.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#050b11]/80 via-transparent to-transparent" />
+                    </div>
+                  ) : (
                   <div className="relative h-full w-full">
                     <GridOverlay opacity={0.1} />
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -228,10 +149,11 @@ export default function FeaturedCategoriesAndBrands() {
                       />
                     </div>
                   </div>
+                  )}
                 </div>
 
                 {/* Category Name */}
-                <p className="text-center font-mono text-xs font-bold uppercase tracking-wider text-[#a7b2c7] transition-colors duration-300 group-hover:text-[#00ff95]">
+                <p className="text-center font-mono text-sm sm:text-base font-bold uppercase tracking-wider text-[#a7b2c7] transition-colors duration-300 group-hover:text-[#00ff95]">
                   {category.name}
                 </p>
 
@@ -247,123 +169,62 @@ export default function FeaturedCategoriesAndBrands() {
           </div>
         </div>
 
-        {/* Top Brands Section */}
-        <div>
+        {/* Quote Section */}
+        <div className="mt-16 sm:mt-20 md:mt-24">
           <div
-            className={`mb-8 text-center transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
+            className={`relative mx-auto max-w-4xl transition-all duration-1000 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
-            style={{ transitionDelay: "200ms" }}
+            style={{ transitionDelay: "400ms" }}
           >
-            <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#f5f7ff]">
-              TOP BRANDS
-            </h2>
-            <p className="font-mono text-sm text-[#6c7383]">
-              // BRAND DISCOUNT DATABASE
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-            {TOP_BRANDS.map((brand, index) => (
-              <Link
-                key={brand.id}
-                href={brand.href}
-                className="group relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-full border-2 border-[rgba(0,255,149,0.2)] bg-[#070f17] p-4 transition-all duration-500 hover:border-[#00ff95] hover:shadow-[0_0_30px_rgba(0,255,149,0.3)]"
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible
-                    ? "translateY(0) scale(1)"
-                    : "translateY(30px) scale(0.9)",
-                  transitionDelay: `${300 + index * 50}ms`,
-                }}
-              >
-                <GridOverlay opacity={0.05} />
+            <div className="relative overflow-hidden rounded-2xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-8 sm:p-12 md:p-16">
+              <GridOverlay opacity={0.08} />
+              
+              {/* Decorative Quote Marks */}
+              <div className="absolute left-4 top-4 sm:left-6 sm:top-6 md:left-8 md:top-8 opacity-30">
+                <svg
+                  width="80"
+                  height="80"
+                  viewBox="0 0 100 100"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 30C20 20 25 15 35 15C45 15 50 20 50 30C50 40 45 45 35 45C30 45 25 42 23 40V55H10V30H20Z"
+                    fill="#00ff95"
+                  />
+                  <path
+                    d="M70 30C70 20 75 15 85 15C95 15 100 20 100 30C100 40 95 45 85 45C80 45 75 42 73 40V55H60V30H70Z"
+                    fill="#00ff95"
+                  />
+                </svg>
+              </div>
 
-                {/* Orbital Particles on Hover */}
-                <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  {Array.from({ length: 4 }).map((_, i) => {
-                    const angle = (i * 360) / 4;
-                    const radius = 60;
-                    return (
-                      <div
-                        key={i}
-                        className="absolute h-1 w-1 rounded-full"
-                        style={{
-                          left: "50%",
-                          top: "50%",
-                          backgroundColor: brand.color,
-                          transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(-${radius}px)`,
-                          animation: `orbital-rotate ${3 + i}s linear infinite`,
-                          animationDelay: `${i * 0.3}s`,
-                        }}
-                      />
-                    );
-                  })}
-                </div>
+              {/* Quote Text */}
+              <div className="relative z-10 text-center">
+                <blockquote className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-relaxed text-[#f5f7ff] italic">
+                  <p className="mb-4">
+                    "Love doesn't always need words. Sometimes it comes quietly, resting its paws on your knee, reminding you that you are seen, safe, and loved."
+                  </p>
+                </blockquote>
+              </div>
 
-                {/* Brand Logo Placeholder */}
-                <div className="relative mb-8 flex h-20 w-20 items-center justify-center">
-                  <div
-                    className="h-full w-full rounded-full border-2 transition-all duration-300 group-hover:scale-110"
-                    style={{
-                      borderColor: brand.color,
-                      backgroundColor: `${brand.color}10`,
-                      boxShadow: `0 0 20px ${brand.color}30`,
-                    }}
-                  >
-                    <div className="flex h-full w-full items-center justify-center">
-                      <div
-                        className="h-8 w-8 rounded-full"
-                        style={{
-                          backgroundColor: brand.color,
-                          opacity: 0.3,
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Discount Badge - Bottom Center */}
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10">
-                  <div
-                    className="flex items-center justify-center rounded-full border-2 px-2.5 py-1 transition-all duration-300 group-hover:scale-110"
-                    style={{
-                      backgroundColor: `${brand.color}20`,
-                      borderColor: brand.color,
-                      boxShadow: `0 0 15px ${brand.color}40`,
-                    }}
-                  >
-                    <p
-                      className="text-center font-mono text-[9px] font-bold leading-tight uppercase tracking-tighter"
-                      style={{ color: brand.color }}
-                    >
-                      {brand.discount}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Hover Glow */}
+              {/* Bottom Accent Line */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#00ff95] to-transparent opacity-50" />
+              
+              {/* Glow Effect */}
+              <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <div
-                  className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  className="absolute inset-0"
                   style={{
-                    background: `radial-gradient(circle at center, ${brand.color}15 0%, transparent 70%)`,
+                    background: `radial-gradient(circle at center, rgba(0,255,149,0.1) 0%, transparent 70%)`,
                   }}
                 />
-              </Link>
-            ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes orbital-rotate {
-          from {
-            transform: translate(-50%, -50%) rotate(0deg) translateY(-60px) rotate(0deg);
-          }
-          to {
-            transform: translate(-50%, -50%) rotate(360deg) translateY(-60px) rotate(-360deg);
-          }
-        }
-      `}</style>
     </section>
   );
 }

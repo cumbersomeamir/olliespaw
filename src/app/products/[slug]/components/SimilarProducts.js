@@ -64,7 +64,7 @@ export default function SimilarProducts() {
                   {product.title}
                 </p>
               </Link>
-              <p className="mb-3 text-xs text-foreground/60">1-2 Days Delivery</p>
+              <p className="mb-3 text-xs text-foreground/60">6-7 Days Delivery</p>
               <button
                 onClick={() => addToCart(product, "Standard", 1)}
                 className="flex w-full items-center justify-center gap-2 bg-primary px-4 py-2 text-xs font-medium text-background hover:bg-primary/90"

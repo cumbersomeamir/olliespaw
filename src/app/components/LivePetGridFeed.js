@@ -58,9 +58,6 @@ export default function LivePetGridFeed() {
           <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
             LIVE PET GRID FEED
           </h2>
-          <p className="font-mono text-sm text-[#6c7383]">
-            // REAL-TIME SIGNAL PROCESSING
-          </p>
         </div>
 
         {/* Console Table */}

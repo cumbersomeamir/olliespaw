@@ -53,32 +53,9 @@ export default function ProductDetails({ product }) {
                 : "border-foreground/20 bg-background text-foreground"
             }`}
           >
-            1-2 Days Delivery
-          </button>
-          <button
-            onClick={() => setSelectedDelivery("express")}
-            className={`flex items-center gap-2 rounded border px-4 py-2 text-sm ${
-              selectedDelivery === "express"
-                ? "border-primary bg-primary text-background"
-                : "border-foreground/20 bg-background text-foreground"
-            }`}
-          >
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              />
-            </svg>
-            60 Minutes
+            6-7 Days Delivery
           </button>
         </div>
-        {selectedDelivery === "express" && (
-          <button className="mt-2 text-sm text-primary underline">
-            Select your Location
-          </button>
-        )}
       </div>
 
       {/* Pricing */}

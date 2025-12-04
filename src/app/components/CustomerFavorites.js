@@ -122,9 +122,6 @@ export default function CustomerFavorites() {
           <h2 className="mb-2 text-xl sm:text-2xl font-semibold uppercase tracking-[0.2em] text-[#f5f7ff]">
             CUSTOMER FAVORITES
           </h2>
-          <p className="font-mono text-sm text-[#6c7383]">
-            // SIGNAL-BASED RANKING
-          </p>
         </div>
 
         {/* Category Grid */}

@@ -1,24 +1,6 @@
 "use client";
 
 import { useCart } from "@/contexts/CartContext";
-import { useState } from "react";
-
-const SUGGESTED_PRODUCTS = [
-  {
-    id: "suggested-1",
-    title: "Classic Leash – Forest Green",
-    price: "₹ 195.00",
-    image: "/placeholder.jpg",
-    sizes: ["30", "32", "34", "36"],
-  },
-  {
-    id: "suggested-2",
-    title: "Travel Tote – Moss",
-    price: "₹ 195.00",
-    image: "/placeholder.jpg",
-    sizes: ["30", "32", "34", "36"],
-  },
-];
 
 export default function CartSidebar() {
   const {
@@ -28,16 +10,11 @@ export default function CartSidebar() {
     getSubtotal,
     isCartOpen,
     setIsCartOpen,
-    addToCart,
   } = useCart();
-  const [suggestedIndex, setSuggestedIndex] = useState(0);
-  const [selectedSuggestedSize, setSelectedSuggestedSize] = useState("30");
 
   const subtotal = getSubtotal();
   const freeShippingThreshold = 1500;
   const remainingForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
-
-  const suggestedProduct = SUGGESTED_PRODUCTS[suggestedIndex];
 
   if (!isCartOpen) return null;
 
@@ -92,7 +69,24 @@ export default function CartSidebar() {
                   <div key={`${item.id}-${item.size}`} className="px-6 py-4">
                     <div className="flex gap-4">
                       {/* Thumbnail */}
-                      <div className="h-20 w-20 flex-shrink-0 bg-white" />
+                      <div className="h-20 w-20 flex-shrink-0 bg-white overflow-hidden relative">
+                        {Array.isArray(item.images) && item.images[0]?.url ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={item.images[0].url}
+                            alt={item.images[0].alt || item.title}
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%23f3f4f6' width='80' height='80'/%3E%3Ctext fill='%239ca3af' font-family='sans-serif' font-size='12' x='50%25' y='50%25' text-anchor='middle' dy='.3em'%3EProduct%3C/text%3E%3C/svg%3E";
+                            }}
+                          />
+                        ) : (
+                          <div className="h-full w-full bg-accent/30 flex items-center justify-center">
+                            <span className="text-foreground/40 text-xs">No Image</span>
+                          </div>
+                        )}
+                      </div>
 
                       {/* Item Details */}
                       <div className="flex-1">
@@ -155,86 +149,6 @@ export default function CartSidebar() {
               </div>
             )}
           </div>
-
-          {/* Complete Your Purchase Section */}
-          {cartItems.length > 0 && (
-            <div className="border-t border-foreground/10 px-6 py-6">
-              <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-foreground">
-                COMPLETE YOUR PURCHASE
-              </h3>
-              <div className="relative">
-                {/* Carousel Arrows */}
-                <button
-                  onClick={() =>
-                    setSuggestedIndex(
-                      (prev) => (prev - 1 + SUGGESTED_PRODUCTS.length) % SUGGESTED_PRODUCTS.length
-                    )
-                  }
-                  className="absolute left-0 top-1/2 -translate-y-1/2 text-foreground/60 hover:text-foreground"
-                >
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() =>
-                    setSuggestedIndex((prev) => (prev + 1) % SUGGESTED_PRODUCTS.length)
-                  }
-                  className="absolute right-0 top-1/2 -translate-y-1/2 text-foreground/60 hover:text-foreground"
-                >
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-
-                <div className="flex gap-4">
-                  <div className="h-20 w-20 flex-shrink-0 bg-white" />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-foreground">
-                      {suggestedProduct.title}
-                    </p>
-                    <p className="mt-1 text-sm text-foreground">{suggestedProduct.price}</p>
-
-                    {/* Size Options */}
-                    <div className="mt-3 flex gap-2">
-                      {suggestedProduct.sizes.map((size) => (
-                        <button
-                          key={size}
-                          onClick={() => setSelectedSuggestedSize(size)}
-                          className={`h-8 px-3 text-xs ${
-                            selectedSuggestedSize === size
-                              ? "border border-foreground bg-foreground text-background"
-                              : "border border-foreground/20 bg-background text-foreground hover:border-foreground/40"
-                          }`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-
-                    <button
-                      onClick={() => {
-                        addToCart(suggestedProduct, selectedSuggestedSize, 1);
-                      }}
-                      className="mt-3 w-full border border-foreground bg-background px-4 py-2 text-sm font-medium uppercase tracking-wider text-foreground hover:bg-foreground hover:text-background"
-                    >
-                      ADD TO CART
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* Footer */}
           <div className="border-t border-foreground/10 px-6 py-6">
