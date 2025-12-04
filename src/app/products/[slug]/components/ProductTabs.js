@@ -52,7 +52,7 @@ export default function ProductTabs({ product }) {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="font-medium text-foreground">Size: </span>
-                  <span className="text-foreground/70">12 kg</span>
+                  <span className="text-foreground/70">200 ml</span>
                 </div>
                 <div>
                   <span className="font-medium text-foreground">Pet Life Stage: </span>
@@ -60,17 +60,14 @@ export default function ProductTabs({ product }) {
                 </div>
                 <div>
                   <span className="font-medium text-foreground">Food Type: </span>
-                  <span className="text-foreground/70">Dry</span>
+                  <span className="text-foreground/70">Liquid</span>
                 </div>
                 <div>
-                  <span className="font-medium text-foreground">Flavor: </span>
-                  <span className="text-foreground/70">Chicken</span>
+
+
                 </div>
               </div>
             </div>
-            <p className="mt-4 text-xs text-foreground/60">
-              Enjoy 60-minute Express Delivery in select cities on selected products!
-            </p>
           </div>
         )}
 

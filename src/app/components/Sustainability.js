@@ -8,7 +8,7 @@ const SUSTAINABILITY_POINTS = [
     id: 1,
     title: "ECO-FRIENDLY PACKAGING",
     description: "100% recyclable and biodegradable packaging materials",
-    percentage: 100,
+    percentage: 85,
     color: "#00ff95",
     icon: "♻️",
   },
@@ -16,7 +16,7 @@ const SUSTAINABILITY_POINTS = [
     id: 2,
     title: "LOCAL SOURCING",
     description: "Supporting Indian farmers and local suppliers",
-    percentage: 85,
+    percentage: 100,
     color: "#00e0ff",
     icon: "🌾",
   },
@@ -60,18 +60,19 @@ function WordByWordReveal({ text, isVisible, delay = 0 }) {
   }, [isVisible, text]);
 
   return (
-    <span>
+    <span className="whitespace-normal">
       {revealedWords.map((word, index) => (
         <span
           key={index}
-          className="inline-block transition-all duration-300"
+          className="inline transition-all duration-300"
           style={{
             opacity: 1,
             transform: "translateY(0)",
             animationDelay: `${index * 0.1}s`,
           }}
         >
-          {word}{" "}
+          {word}
+          {index < revealedWords.length - 1 && " "}
         </span>
       ))}
       {revealedWords.length < text.split(" ").length && (

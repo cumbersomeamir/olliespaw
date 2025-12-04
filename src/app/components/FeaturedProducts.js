@@ -8,48 +8,43 @@ import GridOverlay from "@/components/matrix/GridOverlay";
 const FEATURED_PRODUCTS = [
   {
     id: "1",
-    title: "PREMIUM DOG TREATS",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=600&fit=crop&q=80",
+    title: "PET + IRON",
+    image: "/images/PET IRON.jpeg",
+    price: "₹ 450.00",
     deliveryTime: "2-3 days",
-    dietaryInfo: "For Dogs",
-    accent: "#00ff95",
-    slug: "premium-dog-treats",
+    dietaryInfo: "For All Pets",
+    accent: "#ff3670",
+    slug: "pet-iron",
   },
   {
     id: "2",
-    title: "ORGANIC CAT FOOD BOWL",
-    image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=600&fit=crop&q=80",
+    title: "PET + CALCIUM",
+    image: "/images/PET CALCIUM.jpeg",
+    price: "₹ 380.00",
     deliveryTime: "1-2 days",
-    dietaryInfo: "For Cats",
+    dietaryInfo: "For All Pets",
     accent: "#00e0ff",
-    slug: "organic-cat-food-bowl",
+    slug: "pet-calcium",
   },
   {
     id: "3",
-    title: "NATURAL PET SUPPLEMENTS",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=600&fit=crop&q=80",
+    title: "VITAPET",
+    image: "/images/VITA PET.jpeg",
+    price: "₹ 420.00",
     deliveryTime: "3-5 days",
     dietaryInfo: "For All Pets",
-    accent: "#7c5cff",
-    slug: "natural-pet-supplements",
+    accent: "#ffed4f",
+    slug: "vitapet",
   },
   {
     id: "4",
-    title: "PREMIUM DOG LEASH & COLLAR SET",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=600&fit=crop&q=80",
+    title: "PET FERTILE",
+    image: "/images/PET FERTILE.jpeg",
+    price: "₹ 550.00",
     deliveryTime: "2-4 days",
-    dietaryInfo: "For Dogs",
-    accent: "#00ff95",
-    slug: "premium-dog-leash-collar-set",
-  },
-  {
-    id: "5",
-    title: "LUXURY PET BED",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=600&fit=crop&q=80",
-    deliveryTime: "5-7 days",
     dietaryInfo: "For All Pets",
-    accent: "#ff3670",
-    slug: "luxury-pet-bed",
+    accent: "#00ff95",
+    slug: "pet-fertile",
   },
 ];
 
@@ -57,6 +52,7 @@ export default function FeaturedProducts() {
   const [isVisible, setIsVisible] = useState(false);
   const [centerIndex, setCenterIndex] = useState(0);
   const scrollContainerRef = useRef(null);
+  const cardRefs = useRef([]);
 
   useEffect(() => {
     setIsVisible(true);
@@ -64,28 +60,120 @@ export default function FeaturedProducts() {
     const handleScroll = () => {
       if (scrollContainerRef.current) {
         const scrollLeft = scrollContainerRef.current.scrollLeft;
-        const cardWidth = 336; // 320px + 16px gap
-        const newCenterIndex = Math.round(scrollLeft / cardWidth);
-        setCenterIndex(newCenterIndex);
+        const container = scrollContainerRef.current;
+        
+        // Calculate which card is most visible
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+        
+        cardRefs.current.forEach((card, index) => {
+          if (card) {
+            const cardRect = card.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const containerCenter = containerRect.left + containerRect.width / 2;
+            const distance = Math.abs(cardCenter - containerCenter);
+            
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestIndex = index;
+            }
+          }
+        });
+        
+        setCenterIndex(closestIndex);
       }
     };
 
     const container = scrollContainerRef.current;
     if (container) {
       container.addEventListener("scroll", handleScroll);
-      return () => container.removeEventListener("scroll", handleScroll);
+      // Also check on resize
+      window.addEventListener("resize", handleScroll);
+      return () => {
+        container.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleScroll);
+      };
     }
   }, []);
 
   const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -400, behavior: "smooth" });
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current;
+    
+    // Find the currently centered card
+    let currentCardIndex = 0;
+    let minDistance = Infinity;
+    
+    cardRefs.current.forEach((card, index) => {
+      if (card) {
+        const cardRect = card.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+        const containerCenter = containerRect.left + containerRect.width / 2;
+        const distance = Math.abs(cardCenter - containerCenter);
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          currentCardIndex = index;
+        }
+      }
+    });
+    
+    // Scroll to previous card
+    const targetIndex = Math.max(0, currentCardIndex - 1);
+    const targetCard = cardRefs.current[targetIndex];
+    
+    if (targetCard) {
+      const containerRect = container.getBoundingClientRect();
+      const cardRect = targetCard.getBoundingClientRect();
+      const scrollLeft = container.scrollLeft;
+      const cardLeft = cardRect.left - containerRect.left + scrollLeft;
+      const containerCenter = containerRect.width / 2;
+      const cardCenter = cardRect.width / 2;
+      const targetScroll = cardLeft - containerCenter + cardCenter;
+      
+      container.scrollTo({ left: targetScroll, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 400, behavior: "smooth" });
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current;
+    
+    // Find the currently centered card
+    let currentCardIndex = 0;
+    let minDistance = Infinity;
+    
+    cardRefs.current.forEach((card, index) => {
+      if (card) {
+        const cardRect = card.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+        const containerCenter = containerRect.left + containerRect.width / 2;
+        const distance = Math.abs(cardCenter - containerCenter);
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          currentCardIndex = index;
+        }
+      }
+    });
+    
+    // Scroll to next card
+    const targetIndex = Math.min(FEATURED_PRODUCTS.length - 1, currentCardIndex + 1);
+    const targetCard = cardRefs.current[targetIndex];
+    
+    if (targetCard) {
+      const containerRect = container.getBoundingClientRect();
+      const cardRect = targetCard.getBoundingClientRect();
+      const scrollLeft = container.scrollLeft;
+      const cardLeft = cardRect.left - containerRect.left + scrollLeft;
+      const containerCenter = containerRect.width / 2;
+      const cardCenter = cardRect.width / 2;
+      const targetScroll = cardLeft - containerCenter + cardCenter;
+      
+      container.scrollTo({ left: targetScroll, behavior: "smooth" });
     }
   };
 
@@ -126,15 +214,16 @@ export default function FeaturedProducts() {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative">
+        <div className="relative px-8 sm:px-12 md:px-16">
           {/* Scroll Buttons */}
           <button
             onClick={scrollLeft}
-            className="absolute left-2 sm:left-0 top-1/2 z-10 -translate-y-1/2 rounded-full border-2 border-[#00ff95] bg-[#070f17]/90 p-2 sm:p-3 text-[#00ff95] shadow-lg backdrop-blur-sm transition-all hover:bg-[#00ff95] hover:text-[#040608] hover:scale-110 active:scale-95 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
+            disabled={centerIndex === 0}
+            className="absolute left-0 top-1/2 z-20 -translate-y-1/2 rounded-full border-2 border-[#00ff95] bg-[#070f17]/95 p-3 sm:p-4 text-[#00ff95] shadow-lg backdrop-blur-sm transition-all hover:bg-[#00ff95] hover:text-[#040608] hover:scale-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#070f17]/95 disabled:hover:text-[#00ff95] disabled:hover:scale-100 touch-manipulation min-h-[48px] min-w-[48px] flex items-center justify-center"
             aria-label="Scroll left"
           >
             <svg
-              className="h-5 w-5 sm:h-6 sm:w-6"
+              className="h-6 w-6 sm:h-7 sm:w-7"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -142,7 +231,7 @@ export default function FeaturedProducts() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={2.5}
                 d="M15 19l-7-7 7-7"
               />
             </svg>
@@ -150,11 +239,12 @@ export default function FeaturedProducts() {
 
           <button
             onClick={scrollRight}
-            className="absolute right-2 sm:right-0 top-1/2 z-10 -translate-y-1/2 rounded-full border-2 border-[#00ff95] bg-[#070f17]/90 p-2 sm:p-3 text-[#00ff95] shadow-lg backdrop-blur-sm transition-all hover:bg-[#00ff95] hover:text-[#040608] hover:scale-110 active:scale-95 touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
+            disabled={centerIndex === FEATURED_PRODUCTS.length - 1}
+            className="absolute right-0 top-1/2 z-20 -translate-y-1/2 rounded-full border-2 border-[#00ff95] bg-[#070f17]/95 p-3 sm:p-4 text-[#00ff95] shadow-lg backdrop-blur-sm transition-all hover:bg-[#00ff95] hover:text-[#040608] hover:scale-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#070f17]/95 disabled:hover:text-[#00ff95] disabled:hover:scale-100 touch-manipulation min-h-[48px] min-w-[48px] flex items-center justify-center"
             aria-label="Scroll right"
           >
             <svg
-              className="h-5 w-5 sm:h-6 sm:w-6"
+              className="h-6 w-6 sm:h-7 sm:w-7"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -162,7 +252,7 @@ export default function FeaturedProducts() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={2.5}
                 d="M9 5l7 7-7 7"
               />
             </svg>
@@ -171,7 +261,7 @@ export default function FeaturedProducts() {
           {/* Product Cards Carousel */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-hide pb-4 scroll-smooth px-2 sm:px-4 snap-x snap-mandatory"
+            className="flex gap-6 sm:gap-8 md:gap-10 overflow-x-auto scrollbar-hide pb-4 scroll-smooth snap-x snap-mandatory"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -182,14 +272,20 @@ export default function FeaturedProducts() {
               const distance = Math.abs(index - centerIndex);
               
               return (
-                <MatrixProductCard
+                <div
                   key={product.id}
-                  product={product}
-                  index={index}
-                  isVisible={isVisible}
-                  isCenter={isCenter}
-                  distance={distance}
-                />
+                  ref={(el) => {
+                    if (el) cardRefs.current[index] = el;
+                  }}
+                >
+                  <MatrixProductCard
+                    product={product}
+                    index={index}
+                    isVisible={isVisible}
+                    isCenter={isCenter}
+                    distance={distance}
+                  />
+                </div>
               );
             })}
           </div>
@@ -201,18 +297,18 @@ export default function FeaturedProducts() {
 
 function MatrixProductCard({ product, index, isVisible, isCenter, distance }) {
   const [isHovered, setIsHovered] = useState(false);
-  const scale = isCenter ? 1.0 : 0.88;
-  const opacity = isCenter ? 1 : 0.6;
+  const scale = isCenter ? 1.0 : 0.92;
+  const opacity = isCenter ? 1 : 0.7;
 
   return (
     <div
       className="group relative flex-shrink-0 transition-all duration-500 snap-center"
       style={{
-        minWidth: "280px",
-        maxWidth: "280px",
+        minWidth: "300px",
+        maxWidth: "300px",
         transform: `scale(${scale})`,
         opacity: opacity,
-        filter: isCenter ? "brightness(1.1)" : "brightness(0.8)",
+        filter: isCenter ? "brightness(1.1)" : "brightness(0.85)",
         transitionDelay: `${index * 100}ms`,
       }}
       onMouseEnter={() => setIsHovered(true)}
@@ -325,7 +421,7 @@ function MatrixProductCard({ product, index, isVisible, isCenter, distance }) {
 
           {/* Product Title */}
           <h3
-            className={`mb-6 text-xl font-bold uppercase leading-tight transition-all duration-300 ${
+            className={`mb-2 text-xl font-bold uppercase leading-tight transition-all duration-300 ${
               isCenter ? "text-[#f5f7ff]" : "text-[#a7b2c7]"
             }`}
             style={{
@@ -334,6 +430,21 @@ function MatrixProductCard({ product, index, isVisible, isCenter, distance }) {
           >
             {product.title}
           </h3>
+
+          {/* Price */}
+          {product.price && (
+            <div className="mb-6">
+              <p
+                className="text-2xl font-bold transition-colors duration-300"
+                style={{ color: product.accent }}
+              >
+                {product.price}
+              </p>
+              <p className="text-xs text-[#6c7383] font-mono uppercase tracking-wider mt-1">
+                OLLIE'S PAW
+              </p>
+            </div>
+          )}
 
           {/* View Product Button */}
           <div

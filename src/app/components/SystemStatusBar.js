@@ -36,8 +36,8 @@ export default function SystemStatusBar() {
 
   const stats = [
     { label: "SYSTEM UPTIME", value: 99.9, suffix: "%", icon: "⚡" },
-    { label: "ORDERS TODAY", value: 1247, icon: "📦" },
-    { label: "PETS SERVED", value: 45892, icon: "🐾" },
+    { label: "ORDERS TODAY", value: 745, icon: "📦" },
+    { label: "PETS SERVED", value: 9011, icon: "🐾" },
     { label: "ACTIVE USERS", value: 3421, icon: "👥" },
   ];
 

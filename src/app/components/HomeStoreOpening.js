@@ -26,21 +26,24 @@ export default function HomeStoreOpening() {
   const panels = [
     { 
       label: "DOG", 
-      subtitle: "ENTER DOG GRID",
+      subtitle: "DOG",
       accent: "#00ff95",
-      delay: 0 
+      delay: 0,
+      image: "https://media.istockphoto.com/id/1041987488/photo/cute-dog-put-his-face-on-his-knees-to-the-man-and-smiling-from-the-hands-scratching-her-ear.jpg?s=612x612&w=0&k=20&c=NKGf8nmXVdksmNS0Ay696cVPNSIfCJJ1yu_y9jFGBsM="
     },
     { 
       label: "CAT", 
-      subtitle: "ENTER CAT GRID",
+      subtitle: "CAT",
       accent: "#00e0ff",
-      delay: 100 
+      delay: 100,
+      image: "https://www.catster.com/wp-content/uploads/2023/11/orange-persian-cat-JulieK2-Shutterstock.jpg"
     },
     { 
       label: "ALL", 
       subtitle: "VIEW ALL SIGNALS",
       accent: "#7c5cff",
-      delay: 200 
+      delay: 200,
+      image: "https://media.istockphoto.com/id/1296353202/photo/group-of-pets-posing-around-a-border-collie-dog-cat-ferret-rabbit-bird-fish-rodent.jpg?s=612x612&w=0&k=20&c=l4UJze9hXcNABS_3QJcaOU07R1pcuV3L7w_IJTu9o2c="
     },
   ];
 
@@ -73,12 +76,19 @@ function Panel({ panel, isVisible, mousePosition, index }) {
       onTouchStart={() => setIsHovered(true)}
       onTouchEnd={() => setIsHovered(false)}
       style={{
+        backgroundImage: `url(${panel.image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         transform: isHovered 
           ? `perspective(1000px) rotateY(${mousePosition.x * 0.1}deg) rotateX(${-mousePosition.y * 0.1}deg) translateZ(20px)`
           : "perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px)",
         transition: "transform 0.3s ease-out",
       }}
     >
+      {/* Dark Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-opacity duration-500" />
+      
       {/* Background Effects */}
       <CodeRain intensity={8} speed={60} />
       <GridOverlay opacity={0.08} pulse={true} />

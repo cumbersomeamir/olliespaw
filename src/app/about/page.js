@@ -292,6 +292,62 @@ export default function AboutPage() {
           </div>
         </div>
 
+        {/* Quote Section */}
+        <div className="mb-12 sm:mb-14 md:mb-16">
+          <div
+            className={`relative mx-auto max-w-4xl transition-all duration-1000 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "700ms" }}
+          >
+            <div className="relative overflow-hidden rounded-2xl border-2 border-[rgba(0,255,149,0.3)] bg-[#070f17] p-8 sm:p-12 md:p-16">
+              <GridOverlay opacity={0.08} />
+              
+              {/* Decorative Quote Marks */}
+              <div className="absolute left-4 top-4 sm:left-6 sm:top-6 md:left-8 md:top-8 opacity-30">
+                <svg
+                  width="80"
+                  height="80"
+                  viewBox="0 0 100 100"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 30C20 20 25 15 35 15C45 15 50 20 50 30C50 40 45 45 35 45C30 45 25 42 23 40V55H10V30H20Z"
+                    fill="#00ff95"
+                  />
+                  <path
+                    d="M70 30C70 20 75 15 85 15C95 15 100 20 100 30C100 40 95 45 85 45C80 45 75 42 73 40V55H60V30H70Z"
+                    fill="#00ff95"
+                  />
+                </svg>
+              </div>
+
+              {/* Quote Text */}
+              <div className="relative z-10 text-center">
+                <blockquote className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-relaxed text-[#f5f7ff] italic">
+                  <p className="mb-4">
+                    "Love doesn't always need words. Sometimes it comes quietly, resting its paws on your knee, reminding you that you are seen, safe, and loved."
+                  </p>
+                </blockquote>
+              </div>
+
+              {/* Bottom Accent Line */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#00ff95] to-transparent opacity-50" />
+              
+              {/* Glow Effect */}
+              <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `radial-gradient(circle at center, rgba(0,255,149,0.1) 0%, transparent 70%)`,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Values Section */}
         <div className="mb-12 sm:mb-14 md:mb-16">
           <div
