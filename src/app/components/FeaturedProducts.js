@@ -14,7 +14,7 @@ const FEATURED_PRODUCTS = [
     deliveryTime: "2-3 days",
     dietaryInfo: "For All Pets",
     accent: "#ff3670",
-    slug: "pet-iron",
+    slug: "pet-plus-iron",
   },
   {
     id: "2",
@@ -24,7 +24,7 @@ const FEATURED_PRODUCTS = [
     deliveryTime: "1-2 days",
     dietaryInfo: "For All Pets",
     accent: "#00e0ff",
-    slug: "pet-calcium",
+    slug: "pet-plus-calcium",
   },
   {
     id: "3",
@@ -34,7 +34,7 @@ const FEATURED_PRODUCTS = [
     deliveryTime: "3-5 days",
     dietaryInfo: "For All Pets",
     accent: "#ffed4f",
-    slug: "vitapet",
+    slug: "vita-pet",
   },
   {
     id: "4",
@@ -44,7 +44,7 @@ const FEATURED_PRODUCTS = [
     deliveryTime: "2-4 days",
     dietaryInfo: "For All Pets",
     accent: "#00ff95",
-    slug: "pet-fertile",
+    slug: "pet-plus-fertile",
   },
 ];
 
