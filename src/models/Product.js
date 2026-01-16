@@ -23,6 +23,8 @@ const ProductSchema = new Schema(
     accent: { type: String, default: "#00ff95" },
     images: { type: [ImageSchema], default: [] },
     description: { type: String, default: "" },
+    nutritionInfo: { type: String, default: "" },
+    feedingInstructions: { type: String, default: "" },
     highlights: { type: [String], default: [] },
     specs: {
       type: [{ key: String, value: String }],

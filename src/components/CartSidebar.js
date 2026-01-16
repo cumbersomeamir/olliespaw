@@ -65,8 +65,10 @@ export default function CartSidebar() {
               </div>
             ) : (
               <div className="divide-y divide-foreground/10">
-                {cartItems.map((item) => (
-                  <div key={`${item.id}-${item.size}`} className="px-6 py-4">
+                {cartItems.map((item) => {
+                  const itemId = item.slug || item.id;
+                  return (
+                  <div key={`${itemId}-${item.size}`} className="px-6 py-4">
                     <div className="flex gap-4">
                       {/* Thumbnail */}
                       <div className="h-20 w-20 flex-shrink-0 bg-white overflow-hidden relative">
@@ -100,24 +102,29 @@ export default function CartSidebar() {
                         {/* Quantity Selector */}
                         <div className="mt-3 flex items-center gap-3">
                           <button
-                            onClick={() =>
-                              updateQuantity(item.id, item.size, item.quantity - 1)
-                            }
+                            onClick={() => {
+                              const itemId = item.slug || item.id;
+                              updateQuantity(itemId, item.size, item.quantity - 1);
+                            }}
                             className="flex h-8 w-8 items-center justify-center border border-foreground/20 text-foreground hover:border-foreground/40"
                           >
                             −
                           </button>
                           <span className="text-sm text-foreground">{item.quantity}</span>
                           <button
-                            onClick={() =>
-                              updateQuantity(item.id, item.size, item.quantity + 1)
-                            }
+                            onClick={() => {
+                              const itemId = item.slug || item.id;
+                              updateQuantity(itemId, item.size, item.quantity + 1);
+                            }}
                             className="flex h-8 w-8 items-center justify-center border border-foreground/20 text-foreground hover:border-foreground/40"
                           >
                             +
                           </button>
                           <button
-                            onClick={() => removeFromCart(item.id, item.size)}
+                            onClick={() => {
+                              const itemId = item.slug || item.id;
+                              removeFromCart(itemId, item.size);
+                            }}
                             className="ml-auto text-foreground/40 hover:text-foreground"
                           >
                             <svg
@@ -145,7 +152,8 @@ export default function CartSidebar() {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>

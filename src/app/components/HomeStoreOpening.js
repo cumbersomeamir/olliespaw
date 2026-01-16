@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import CodeRain from "@/components/matrix/CodeRain";
-import GridOverlay from "@/components/matrix/GridOverlay";
 
 export default function HomeStoreOpening() {
   const [isVisible, setIsVisible] = useState(false);
@@ -91,7 +90,6 @@ function Panel({ panel, isVisible, mousePosition, index }) {
       
       {/* Background Effects */}
       <CodeRain intensity={8} speed={60} />
-      <GridOverlay opacity={0.08} pulse={true} />
       
       {/* Neon Border Frame */}
       <div
@@ -108,49 +106,6 @@ function Panel({ panel, isVisible, mousePosition, index }) {
       {isHovered && (
         <div className="matrix-scanline absolute inset-0 pointer-events-none" />
       )}
-
-      {/* Wireframe Pet Bed/Crate */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <svg
-          viewBox="0 0 400 400"
-          className="w-2/3 h-2/3 sm:w-3/4 sm:h-3/4 opacity-20 sm:opacity-30 transition-opacity duration-500 group-hover:opacity-40 sm:group-hover:opacity-60"
-          style={{ filter: `drop-shadow(0 0 10px ${panel.accent})` }}
-        >
-          <g
-            fill="none"
-            stroke={panel.accent}
-            strokeWidth="2"
-            strokeOpacity="0.6"
-          >
-            {/* Wireframe structure */}
-            <rect x="50" y="50" width="300" height="300" rx="8" />
-            <rect x="80" y="80" width="240" height="240" rx="6" />
-            <line x1="50" y1="50" x2="80" y2="80" />
-            <line x1="350" y1="50" x2="320" y2="80" />
-            <line x1="50" y1="350" x2="80" y2="320" />
-            <line x1="350" y1="350" x2="320" y2="320" />
-            {/* Inner grid */}
-            {Array.from({ length: 4 }).map((_, i) => (
-              <line
-                key={`v-${i}`}
-                x1={100 + i * 60}
-                y1="100"
-                x2={100 + i * 60}
-                y2="300"
-              />
-            ))}
-            {Array.from({ length: 4 }).map((_, i) => (
-              <line
-                key={`h-${i}`}
-                x1="100"
-                y1={100 + i * 60}
-                x2="300"
-                y2={100 + i * 60}
-              />
-            ))}
-          </g>
-        </svg>
-      </div>
 
       {/* Title - Glitch Reveal */}
       <div

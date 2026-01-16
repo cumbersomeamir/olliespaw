@@ -77,7 +77,7 @@ export default function ProductDetailPage({ params }) {
         <ProductTabs product={product} />
 
         {/* Similar Products */}
-        <SimilarProducts />
+        <SimilarProducts currentProduct={product} />
       </div>
     </div>
   );

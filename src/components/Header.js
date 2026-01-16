@@ -68,16 +68,23 @@ export default function Header() {
                 )}
               </Link>
               {item.hasDropdown && openDropdown === item.label && (
-                <div className="absolute left-0 top-full z-50 mt-2 w-48 rounded border border-foreground/10 bg-background shadow-lg">
-                  <div className="py-2">
-                    <Link
-                      href={item.href}
-                      className="block px-4 py-2 text-sm hover:bg-foreground/5"
-                    >
-                      View All
-                    </Link>
+                <>
+                  {/* Invisible bridge to prevent gap */}
+                  <div className="absolute left-0 top-full h-2 w-full" />
+                  {/* Dropdown menu */}
+                  <div className="absolute left-0 top-full z-50 pt-2 w-48">
+                    <div className="rounded border border-foreground/10 bg-background shadow-lg">
+                      <div className="py-2">
+                        <Link
+                          href={item.href}
+                          className="block px-4 py-2 text-sm hover:bg-foreground/5"
+                        >
+                          View All
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </>
               )}
             </div>
           ))}

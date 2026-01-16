@@ -30,7 +30,13 @@ export default function ProductDetails({ product }) {
   };
 
   const handleAddToCart = () => {
-    addToCart(product, product.size || "Standard", quantity);
+    // Ensure product has a consistent identifier
+    const productWithId = {
+      ...product,
+      id: product.slug || product.id,
+      slug: product.slug,
+    };
+    addToCart(productWithId, product.size || "Standard", quantity);
   };
 
   return (

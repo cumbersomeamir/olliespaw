@@ -10,23 +10,40 @@ export function CartProvider({ children }) {
 
   const addToCart = (product, size, quantity = 1) => {
     setCartItems((prev) => {
-      const existing = prev.find(
-        (item) => item.id === product.id && item.size === size
-      );
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id && item.size === size
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
+      // Use slug as the primary identifier, fallback to id
+      const productId = product.slug || product.id;
+      if (!productId) {
+        console.error("Product must have a slug or id", product);
+        return prev;
       }
-      return [...prev, { ...product, size, quantity }];
+      
+      const existing = prev.find(
+        (item) => {
+          const itemId = item.slug || item.id;
+          return itemId === productId && item.size === size;
+        }
+      );
+      
+      if (existing) {
+        return prev.map((item) => {
+          const itemId = item.slug || item.id;
+          return itemId === productId && item.size === size
+            ? { ...item, quantity: item.quantity + quantity }
+            : item;
+        });
+      }
+      return [...prev, { ...product, id: productId, slug: product.slug || productId, size, quantity }];
     });
     setIsCartOpen(true);
   };
 
   const removeFromCart = (id, size) => {
-    setCartItems((prev) => prev.filter((item) => !(item.id === id && item.size === size)));
+    setCartItems((prev) => 
+      prev.filter((item) => {
+        const itemId = item.slug || item.id;
+        return !(itemId === id && item.size === size);
+      })
+    );
   };
 
   const updateQuantity = (id, size, quantity) => {
@@ -35,9 +52,10 @@ export function CartProvider({ children }) {
       return;
     }
     setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id && item.size === size ? { ...item, quantity } : item
-      )
+      prev.map((item) => {
+        const itemId = item.slug || item.id;
+        return itemId === id && item.size === size ? { ...item, quantity } : item;
+      })
     );
   };
 
